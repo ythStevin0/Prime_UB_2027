@@ -1,0 +1,309 @@
+@import "tailwindcss";
+
+/* ============================================
+   PRIME UB 2027 — DESIGN TOKENS
+   Tema: Hitam + Biru + Glassmorphism
+   Arsitektur: Primitive → Semantic → Component
+   ============================================ */
+
+/* ---- PRIMITIVE TOKENS ---- */
+:root {
+  /* Hitam / Netral */
+  --color-black: #000000;
+  --color-gray-950: #0a0a0f;
+  --color-gray-900: #111118;
+  --color-gray-850: #16161f;
+  --color-gray-800: #1c1c27;
+  --color-gray-700: #2a2a3a;
+  --color-gray-600: #3d3d52;
+  --color-gray-500: #5c5c75;
+  --color-gray-400: #8585a0;
+  --color-gray-300: #ababbe;
+  --color-gray-200: #cdcdd8;
+  --color-gray-100: #e8e8ef;
+  --color-gray-50: #f4f4f8;
+  --color-white: #ffffff;
+
+  /* Biru (Warna Utama) */
+  --color-blue-950: #0a1128;
+  --color-blue-900: #0f1b3d;
+  --color-blue-800: #162755;
+  --color-blue-700: #1e3a6e;
+  --color-blue-600: #2a52a0;
+  --color-blue-500: #3b6dd4;
+  --color-blue-400: #5b8be8;
+  --color-blue-300: #85a8f0;
+  --color-blue-200: #b0c8f7;
+  --color-blue-100: #dae5fc;
+  --color-blue-50: #eef3fe;
+
+  /* Aksen — Cyan / Electric */
+  --color-cyan-500: #06b6d4;
+  --color-cyan-400: #22d3ee;
+  --color-cyan-300: #67e8f9;
+
+  /* Aksen — Violet */
+  --color-violet-500: #8b5cf6;
+  --color-violet-400: #a78bfa;
+
+  /* Status */
+  --color-emerald-500: #10b981;
+  --color-amber-500: #f59e0b;
+  --color-rose-500: #f43f5e;
+
+  /* Tipografi */
+  --font-heading: var(--font-geist-sans), "Inter", system-ui, sans-serif;
+  --font-body: var(--font-geist-sans), "Inter", system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), "JetBrains Mono", monospace;
+
+  /* Spacing */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+
+  /* Border Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+  --radius-full: 9999px;
+
+  /* Shadow */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.6);
+  --shadow-glow-blue: 0 0 24px rgba(59, 109, 212, 0.3);
+  --shadow-glow-cyan: 0 0 24px rgba(6, 182, 212, 0.3);
+
+  /* Motion */
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+  --duration-page: 500ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Z-Index */
+  --z-base: 0;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+  --z-tooltip: 600;
+}
+
+/* ---- SEMANTIC TOKENS (Dark Mode Default) ---- */
+:root {
+  /* Background */
+  --bg-primary: var(--color-gray-950);
+  --bg-secondary: var(--color-gray-900);
+  --bg-tertiary: var(--color-gray-850);
+  --bg-elevated: var(--color-gray-800);
+  --bg-overlay: rgba(10, 10, 15, 0.8);
+  --bg-glass: rgba(22, 22, 31, 0.6);
+  --bg-glass-hover: rgba(22, 22, 31, 0.8);
+
+  /* Foreground / Text */
+  --fg-primary: var(--color-white);
+  --fg-secondary: var(--color-gray-300);
+  --fg-tertiary: var(--color-gray-400);
+  --fg-muted: var(--color-gray-500);
+  --fg-inverse: var(--color-gray-950);
+
+  /* Brand */
+  --brand-primary: var(--color-blue-500);
+  --brand-primary-hover: var(--color-blue-400);
+  --brand-primary-active: var(--color-blue-600);
+  --brand-secondary: var(--color-cyan-500);
+  --brand-accent: var(--color-violet-500);
+
+  /* Border */
+  --border-default: rgba(255, 255, 255, 0.08);
+  --border-subtle: rgba(255, 255, 255, 0.04);
+  --border-strong: rgba(255, 255, 255, 0.15);
+  --border-brand: rgba(59, 109, 212, 0.4);
+  --border-glass: rgba(255, 255, 255, 0.1);
+
+  /* Status */
+  --status-success: var(--color-emerald-500);
+  --status-warning: var(--color-amber-500);
+  --status-error: var(--color-rose-500);
+  --status-info: var(--color-blue-400);
+
+  /* Gradient */
+  --gradient-brand: linear-gradient(135deg, var(--color-blue-600), var(--color-blue-400));
+  --gradient-brand-vivid: linear-gradient(135deg, var(--color-blue-500), var(--color-cyan-400));
+  --gradient-surface: linear-gradient(180deg, var(--color-gray-900), var(--color-gray-950));
+  --gradient-hero: linear-gradient(135deg, var(--color-blue-950) 0%, var(--color-gray-950) 50%, var(--color-blue-900) 100%);
+  --gradient-text: linear-gradient(135deg, var(--color-blue-300), var(--color-cyan-300));
+}
+
+/* ---- TAILWIND THEME INTEGRATION ---- */
+@theme inline {
+  /* Colors */
+  --color-background: var(--bg-primary);
+  --color-foreground: var(--fg-primary);
+  --color-brand: var(--brand-primary);
+  --color-brand-hover: var(--brand-primary-hover);
+  --color-brand-active: var(--brand-primary-active);
+  --color-brand-secondary: var(--brand-secondary);
+  --color-brand-accent: var(--brand-accent);
+
+  --color-surface: var(--bg-secondary);
+  --color-surface-elevated: var(--bg-elevated);
+  --color-surface-glass: var(--bg-glass);
+
+  --color-muted: var(--fg-muted);
+  --color-muted-foreground: var(--fg-tertiary);
+
+  --color-border: var(--border-default);
+  --color-border-strong: var(--border-strong);
+
+  --color-success: var(--status-success);
+  --color-warning: var(--status-warning);
+  --color-error: var(--status-error);
+  --color-info: var(--status-info);
+
+  /* Fonts */
+  --font-sans: var(--font-heading);
+  --font-mono: var(--font-mono);
+
+  /* Animation */
+  --animate-fade-in: fade-in var(--duration-normal) var(--ease-out);
+  --animate-slide-up: slide-up var(--duration-normal) var(--ease-out);
+  --animate-slide-down: slide-down var(--duration-normal) var(--ease-out);
+  --animate-scale-in: scale-in var(--duration-fast) var(--ease-spring);
+  --animate-glow-pulse: glow-pulse 3s ease-in-out infinite;
+}
+
+/* ---- KEYFRAMES ---- */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-down {
+  from { opacity: 0; transform: translateY(-16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(59, 109, 212, 0.15); }
+  50% { box-shadow: 0 0 40px rgba(59, 109, 212, 0.3); }
+}
+
+/* ---- BASE STYLES ---- */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--fg-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---- GLASSMORPHISM UTILITIES ---- */
+.glass {
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--border-glass);
+}
+
+.glass-strong {
+  background: rgba(22, 22, 31, 0.85);
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* ---- GRADIENT TEXT ---- */
+.text-gradient {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-brand {
+  background: var(--gradient-brand-vivid);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ---- GLOW EFFECTS ---- */
+.glow-blue {
+  box-shadow: var(--shadow-glow-blue);
+}
+
+.glow-cyan {
+  box-shadow: var(--shadow-glow-cyan);
+}
+
+/* ---- FOCUS STYLES ---- */
+:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
+}
+
+/* ---- SELECTION ---- */
+::selection {
+  background: rgba(59, 109, 212, 0.3);
+  color: var(--fg-primary);
+}
+
+/* ---- SCROLLBAR ---- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gray-700);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gray-600);
+}
+
+/* ---- REDUCED MOTION ---- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
