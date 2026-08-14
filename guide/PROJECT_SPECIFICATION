@@ -1,0 +1,1843 @@
+PROJECT_SPECIFICATION.md — Prime UB 2027
+
+Product, Architecture, UX, Security, Performance & Operations Specification
+
+Status: DRAFT — DISCOVERY / ARCHITECTURE PHASE
+
+This document consolidates the remaining project specifications into one working document.
+It is intentionally written so that unresolved decisions are explicit and must not be invented by an AI agent.
+Once decisions are approved, this document becomes a source of truth for implementation.
+
+1. Document Purpose
+
+This document defines the product and technical direction for the Prime UB 2027 competition/event platform.
+
+It complements:
+
+AGENTS.md — AI engineering rules
+
+GEMINI.md — Antigravity/Gemini operating rules
+
+MASTER_PROMPT.md — high-level project constitution
+
+DEVELOPMENT_RULES.md — development discipline
+
+DECISIONS.md — architecture decision index
+
+.agents/skills/ — installed UI/UX and design skills
+
+AI agents MUST treat this document as a specification draft, not permission to invent unresolved requirements.
+
+2. Product Vision
+
+Prime UB 2027 is intended to be a modern digital platform for competitions, events, participants, submissions, and merchandise.
+
+The platform should feel like a premium event platform rather than a generic CRUD website.
+
+Core qualities:
+
+modern
+
+energetic
+
+memorable
+
+trustworthy
+
+interactive
+
+responsive
+
+accessible
+
+fast
+
+secure
+
+maintainable
+
+The supplied visual references may inspire the visual direction, but the implementation should evolve into an original and more coherent design system.
+
+3. Core Product Scope
+
+The public website is expected to contain at least:
+
+Home
+
+Competitions
+
+Events
+
+Merchandise
+
+The platform must also provide participant workflows and administrative functionality.
+
+3.1 Mandatory capabilities
+
+The following are non-negotiable product requirements:
+
+A. Interactive website
+
+The website must have:
+
+responsive design
+
+intentional motion
+
+polished transitions
+
+interactive sections
+
+loading states
+
+empty states
+
+error states
+
+accessible interaction states
+
+mobile/tablet/desktop support
+
+B. Merchandise
+
+The platform must support:
+
+merchandise catalog
+
+product detail
+
+variant selection where applicable
+
+cart
+
+checkout
+
+order creation
+
+payment gateway
+
+payment status
+
+order status
+
+payment confirmation through server-side verification/webhook
+
+C. Competition participation
+
+The platform must support:
+
+participant registration
+
+competition selection
+
+eligibility validation
+
+participant/team information
+
+registration status
+
+competition-specific requirements
+
+D. Submission
+
+Participants must be able to submit competition work.
+
+The submission system should support:
+
+submission creation
+
+submission metadata
+
+file upload
+
+file validation
+
+submission deadline validation
+
+replacement/update before deadline where allowed
+
+submission status
+
+submission history
+
+confirmation
+
+secure access control
+
+E. Events
+
+The platform must support event information and, where required:
+
+event details
+
+schedule
+
+location
+
+event registration
+
+participant/event status
+
+event-specific information
+
+4. Known Event & Competition Scope
+
+Current planning assumption:
+
+5 events
+
+7 competitions
+
+These numbers are currently treated as product requirements based on project planning.
+
+The exact names, descriptions, schedules, eligibility, fees, judging criteria, and submission rules must be confirmed before implementation.
+
+Do NOT invent competition-specific business rules.
+
+5. User Roles
+
+Candidate roles:
+
+Participant
+
+Can:
+
+create/access account
+
+manage profile
+
+register for competitions
+
+view competition requirements
+
+submit work
+
+view submission status
+
+purchase merchandise
+
+view orders
+
+access relevant event information
+
+Administrator
+
+Can:
+
+manage users
+
+manage competitions
+
+manage events
+
+manage merchandise
+
+manage orders
+
+inspect submissions
+
+manage operational content
+
+access audit information
+
+Judge
+
+Potential capabilities:
+
+access assigned competitions
+
+review eligible submissions
+
+record judging results
+
+provide scoring/feedback where applicable
+
+Final judging workflow is unresolved.
+
+Staff
+
+Potential limited operational role.
+
+Permissions must be explicitly defined rather than relying only on broad role names.
+
+6. Authentication & Session Architecture
+
+Authentication and authorization are separate concerns.
+
+The platform must support secure session maintenance.
+
+Conceptual flow:
+
+User
+→ Authentication
+→ Session
+→ Authorization
+→ Protected resource
+
+Requirements:
+
+secure session handling
+
+session expiration policy
+
+session revocation
+
+logout
+
+protection against session abuse
+
+server-side authorization
+
+resource ownership checks
+
+role/permission checks
+
+The frontend must never be the authoritative source of authorization.
+
+Unresolved decisions:
+
+authentication provider/library
+
+session strategy
+
+OAuth providers, if any
+
+email verification
+
+password recovery
+
+MFA requirements
+
+session duration
+
+refresh strategy
+
+These must be decided through ADRs.
+
+7. Competition Domain
+
+A competition should conceptually contain:
+
+identity
+
+title
+
+description
+
+eligibility
+
+registration window
+
+submission window
+
+rules
+
+required deliverables
+
+submission constraints
+
+status
+
+judging configuration
+
+Potential entities:
+
+Competition
+
+CompetitionRegistration
+
+Participant
+
+Team
+
+CompetitionRequirement
+
+Submission
+
+SubmissionFile
+
+JudgingAssignment
+
+Score
+
+Exact data model is not final.
+
+8. Submission Domain
+
+Submission lifecycle should be explicit.
+
+Example:
+
+Draft
+→ Submitted
+→ Under Review
+→ Finalized / Accepted / Rejected
+
+Actual states must be confirmed.
+
+Submission rules must validate server-side:
+
+participant eligibility
+
+competition registration
+
+deadline
+
+allowed file types
+
+file size
+
+ownership
+
+submission count
+
+required fields
+
+Do not rely on frontend validation alone.
+
+9. File Upload Architecture
+
+Large files should normally be stored in object storage rather than directly in PostgreSQL.
+
+Database should store metadata such as:
+
+storage key
+
+original filename
+
+file size
+
+content type
+
+checksum where appropriate
+
+upload timestamp
+
+ownership
+
+submission relationship
+
+processing status
+
+Potential flow:
+
+Browser
+→ secure upload mechanism
+→ Object Storage
+→ metadata persisted in database
+→ optional background processing
+→ submission finalized
+
+Security requirements:
+
+validate file type
+
+validate file size
+
+validate ownership
+
+avoid executable file exposure
+
+use safe storage paths
+
+do not trust filename
+
+do not trust client-provided MIME information alone
+
+10. Event Domain
+
+Potential entities:
+
+Event
+
+EventSchedule
+
+EventLocation
+
+EventRegistration
+
+EventSpeaker/Guest if needed
+
+EventMedia if needed
+
+Events may have:
+
+title
+
+description
+
+date/time
+
+location
+
+capacity
+
+registration status
+
+registration deadline
+
+status
+
+Exact event model remains to be confirmed.
+
+11. Commerce Domain
+
+Potential entities:
+
+Product
+
+ProductVariant
+
+ProductInventory
+
+Cart
+
+CartItem
+
+Order
+
+OrderItem
+
+Payment
+
+PaymentAttempt
+
+Refund
+
+The commerce system must distinguish:
+
+cart state
+
+order state
+
+payment state
+
+fulfillment state
+
+These are not interchangeable.
+
+12. Payment Architecture
+
+Preferred conceptual flow:
+
+Create Order
+→ Create Payment Attempt
+→ Payment Provider
+→ Provider Webhook
+→ Verify Webhook
+→ Idempotency Check
+→ Transaction
+→ Update Payment
+→ Update Order
+
+Critical rules:
+
+never trust client-side payment success
+
+verify webhook authenticity
+
+handle duplicate webhooks
+
+handle retries
+
+maintain idempotency
+
+preserve payment history
+
+reconcile inconsistent states
+
+do not expose provider secrets
+
+Candidate providers:
+
+Midtrans
+
+Xendit
+
+Final provider is unresolved and requires an ADR.
+
+13. Notification Domain
+
+Potential notification channels:
+
+email
+
+in-app
+
+administrative notifications
+
+Potential events:
+
+registration confirmation
+
+submission confirmation
+
+submission deadline reminder
+
+payment confirmation
+
+order status
+
+event reminder
+
+administrative announcements
+
+Expensive or retryable notifications should be suitable for background processing.
+
+Provider is unresolved.
+
+14. Administrative Platform
+
+Administration should not be treated as an afterthought.
+
+Potential admin areas:
+
+dashboard
+
+users
+
+competitions
+
+registrations
+
+submissions
+
+events
+
+merchandise
+
+orders
+
+payments
+
+notifications
+
+content
+
+audit logs
+
+Administrative actions affecting sensitive data should be auditable.
+
+15. Recommended Architecture
+
+Start with a MODULAR MONOLITH.
+
+Do NOT create microservices simply because the system contains multiple domains.
+
+Conceptual layers:
+
+Presentation
+→ Application
+→ Domain
+→ Infrastructure
+
+Presentation
+
+Responsibilities:
+
+pages
+
+components
+
+forms
+
+routes/controllers
+
+request parsing
+
+response formatting
+
+Must not contain complex business rules.
+
+Application
+
+Responsibilities:
+
+use cases
+
+workflow orchestration
+
+transaction coordination
+
+authorization orchestration
+
+application-level policies
+
+Examples:
+
+RegisterParticipant
+
+RegisterCompetition
+
+CreateSubmission
+
+FinalizeSubmission
+
+CreateOrder
+
+CreatePayment
+
+ProcessPaymentWebhook
+
+Domain
+
+Responsibilities:
+
+business rules
+
+invariants
+
+domain entities
+
+value objects
+
+state transitions
+
+domain policies
+
+Business logic should remain testable independently of HTTP.
+
+Infrastructure
+
+Responsibilities:
+
+database
+
+ORM
+
+object storage
+
+payment provider
+
+email
+
+queue
+
+cache
+
+external services
+
+Infrastructure implementations must not leak unnecessarily into domain logic.
+
+16. Candidate Module Boundaries
+
+Candidate modules:
+
+Identity
+Competition
+Submission
+Event
+Commerce
+Payment
+Notification
+Media
+Administration
+Audit
+
+These are boundaries for discussion, not final decisions.
+
+A module should own its business rules and data access patterns as much as practical.
+
+Cross-module communication should be explicit.
+
+17. Controller Rules
+
+Controllers/routes should:
+
+receive request
+
+validate/parse input
+
+authenticate
+
+authorize
+
+invoke use case
+
+format response
+
+Controllers should NOT:
+
+contain complex business rules
+
+directly implement payment state machines
+
+directly implement competition eligibility logic
+
+contain large database workflows
+
+duplicate domain logic
+
+18. Service / Use Case Rules
+
+Services/application use cases orchestrate business workflows.
+
+Example:
+
+CreateSubmission
+    ↓
+Validate participant
+    ↓
+Validate competition registration
+    ↓
+Validate deadline
+    ↓
+Validate requirements
+    ↓
+Persist submission
+    ↓
+Persist file metadata
+    ↓
+Emit event / notification
+
+A service should not become a "god service".
+
+Split workflows by cohesive business responsibility.
+
+19. Database Design Principles
+
+Use a relational database for transactional data.
+
+Likely candidate:
+
+PostgreSQL
+
+Potential data groups:
+
+Identity
+Competition
+Submission
+Event
+Commerce
+Payment
+Notification
+Audit
+
+Rules:
+
+use foreign keys where appropriate
+
+use unique constraints for business invariants
+
+use transactions for atomic workflows
+
+index based on actual query patterns
+
+paginate large datasets
+
+avoid N+1 queries
+
+avoid unbounded queries
+
+protect connection pool capacity
+
+use migrations
+
+never silently perform destructive migrations
+
+ORM remains an unresolved decision.
+
+Candidates:
+
+Prisma
+
+Drizzle
+
+20. API Conventions
+
+API design should be consistent.
+
+Every endpoint should define:
+
+authentication requirement
+
+authorization requirement
+
+input schema
+
+output schema
+
+error semantics
+
+pagination where applicable
+
+idempotency behavior where applicable
+
+Errors must not expose:
+
+stack traces
+
+SQL errors
+
+secrets
+
+internal topology
+
+Input validation must occur server-side.
+
+21. Design System
+
+The design system must be centralized.
+
+Define:
+
+colors
+
+typography
+
+spacing
+
+radii
+
+shadows
+
+borders
+
+breakpoints
+
+z-index strategy
+
+motion tokens
+
+component states
+
+Use semantic tokens rather than scattered raw values.
+
+Example conceptual layers:
+
+Primitive Tokens
+→ Semantic Tokens
+→ Component Tokens
+→ Components
+→ Pages
+
+The installed UI/UX Pro Max skill ecosystem should be used for design reasoning.
+
+22. UI Component Strategy
+
+Potential foundation:
+
+Tailwind CSS
+
+shadcn/ui
+
+21st.dev resources
+
+Framer Motion
+
+These are candidates, not automatically accepted final decisions.
+
+Rules:
+
+components must conform to the design system
+
+do not copy visual styles blindly
+
+avoid duplicate components
+
+use composition
+
+preserve accessibility
+
+define loading/error/empty/disabled/focus states
+
+23. Motion System
+
+Motion should be intentional.
+
+Use motion for:
+
+page transitions
+
+content reveal
+
+hierarchy
+
+feedback
+
+hover/focus
+
+modal/drawer
+
+filtering
+
+cart interactions
+
+submission progress
+
+Prefer:
+
+transform
+
+opacity
+
+Avoid:
+
+unnecessary continuous animations
+
+layout-heavy animations
+
+excessive JavaScript animation loops
+
+animation that harms accessibility
+
+Respect:
+
+prefers-reduced-motion
+
+Motion must never become a performance liability.
+
+24. Responsive Design
+
+Every important page must be evaluated at:
+
+mobile
+
+tablet
+
+desktop
+
+large desktop
+
+Do not merely shrink desktop layouts.
+
+Responsive behavior should be intentionally designed for:
+
+navigation
+
+cards
+
+tables
+
+forms
+
+timelines
+
+galleries
+
+checkout
+
+submission interfaces
+
+admin dashboards
+
+25. Accessibility
+
+Target accessible interfaces.
+
+Requirements include consideration of:
+
+semantic HTML
+
+keyboard navigation
+
+focus states
+
+screen-reader labels
+
+color contrast
+
+form labels
+
+validation feedback
+
+reduced motion
+
+touch target size
+
+non-hover interaction paths
+
+Accessibility is part of the Definition of Done.
+
+26. Performance Architecture
+
+Performance must be considered from the beginning.
+
+Frontend
+
+Monitor:
+
+JavaScript bundle size
+
+hydration cost
+
+rendering cost
+
+image weight
+
+font loading
+
+network waterfalls
+
+client component usage
+
+animation cost
+
+Prefer:
+
+server rendering where appropriate
+
+minimal client components
+
+lazy loading
+
+optimized images
+
+proper caching
+
+streaming where appropriate
+
+Backend
+
+Monitor:
+
+runtime latency
+
+API latency
+
+concurrency
+
+external API latency
+
+queue latency
+
+cache hit rate
+
+Database
+
+Monitor:
+
+query latency
+
+slow queries
+
+N+1
+
+indexes
+
+connection pool
+
+lock contention
+
+transaction duration
+
+Rule
+
+Do not optimize by intuition alone.
+
+Use measurements and profiling to identify bottlenecks.
+
+27. Caching
+
+Caching should be introduced deliberately.
+
+Potential cache targets:
+
+public content
+
+competition metadata
+
+event metadata
+
+product catalog
+
+expensive derived data
+
+Do not cache data whose correctness depends on immediate transactional state unless invalidation is well-defined.
+
+Cache invalidation strategy must be documented.
+
+28. Queue / Background Jobs
+
+Background jobs are appropriate for:
+
+email
+
+notifications
+
+large file processing
+
+report generation
+
+non-critical integrations
+
+retryable provider operations
+
+Do not move every operation into a queue.
+
+Critical transactional state changes should remain deterministic and observable.
+
+Candidate technologies:
+
+Redis + BullMQ
+
+managed queue
+
+Final decision requires an ADR.
+
+29. Reliability
+
+Critical operations must handle:
+
+timeout
+
+retry
+
+duplicate request
+
+duplicate webhook
+
+partial failure
+
+provider outage
+
+database failure
+
+Use idempotency where duplicate processing could create incorrect state.
+
+30. Security Model
+
+Security concerns include:
+
+Authentication
+
+Secure identity and session management.
+
+Authorization
+
+Server-side role/permission/resource ownership checks.
+
+Input validation
+
+All external input must be validated.
+
+File security
+
+Uploads must be restricted and validated.
+
+Payment security
+
+Webhook signatures and provider verification must be enforced.
+
+Secrets
+
+Secrets belong in secure environment/secret management systems, never source control.
+
+Rate limiting
+
+Use where abuse or expensive operations warrant it.
+
+Audit
+
+Sensitive administrative operations should be logged.
+
+31. Observability
+
+Production should have:
+
+structured logs
+
+request correlation IDs
+
+error tracking
+
+metrics
+
+health checks
+
+audit logs
+
+Useful metrics may include:
+
+page/API latency
+
+error rate
+
+payment failure rate
+
+submission failure rate
+
+queue latency
+
+database latency
+
+authentication failures
+
+Do not log passwords, tokens, payment secrets, or unnecessary sensitive personal data.
+
+32. Backup & Recovery
+
+Production data requires:
+
+database backups
+
+backup retention policy
+
+recovery procedure
+
+restoration testing
+
+object-storage strategy
+
+incident procedure
+
+A backup that has never been restored/tested should not be treated as a proven recovery strategy.
+
+33. Deployment & Environments
+
+Recommended conceptual environments:
+
+Development
+    ↓
+Staging
+    ↓
+Production
+
+Configuration should be environment-specific.
+
+Never place production secrets in the repository.
+
+Maintain:
+
+.env.example
+
+with placeholders only.
+
+Deployment strategy is unresolved and requires an ADR.
+
+34. Testing Strategy
+
+Unit
+
+Use for:
+
+business rules
+
+validation
+
+state transitions
+
+utility logic
+
+Integration
+
+Use for:
+
+database
+
+repositories
+
+payment boundaries
+
+storage
+
+queues
+
+API
+
+Test:
+
+authentication
+
+authorization
+
+validation
+
+error semantics
+
+idempotency
+
+E2E
+
+Critical journeys:
+
+Registration/login
+
+Competition registration
+
+Submission
+
+Merchandise purchase
+
+Payment confirmation
+
+Event registration
+
+Administrative workflow
+
+35. Critical User Flows
+
+Participant
+
+Landing Page
+→ Explore Competition
+→ View Requirements
+→ Login/Register
+→ Register Competition
+→ Participant Dashboard
+→ Prepare Submission
+→ Upload
+→ Validate
+→ Submit
+→ Confirmation
+→ Track Status
+
+Merchandise
+
+Merchandise
+→ Product
+→ Select Variant
+→ Cart
+→ Checkout
+→ Create Order
+→ Payment
+→ Provider
+→ Webhook
+→ Verify
+→ Paid
+→ Confirmation
+
+Admin
+
+Admin Login
+→ Dashboard
+→ Manage Competition/Event/Product
+→ Review Activity
+→ Manage Submissions
+→ Manage Orders
+→ Audit
+
+36. Content Management
+
+Public content should be maintainable without requiring source-code changes where practical.
+
+Potential manageable content:
+
+competition descriptions
+
+event information
+
+schedules
+
+merchandise
+
+announcements
+
+FAQ
+
+contact information
+
+Whether a CMS is needed is unresolved.
+
+Do not introduce a CMS without a clear content-management requirement.
+
+37. SEO
+
+Public pages should consider:
+
+semantic structure
+
+metadata
+
+title/description
+
+Open Graph
+
+canonical URLs
+
+sitemap
+
+robots directives
+
+structured data where appropriate
+
+SEO should not compromise performance or accessibility.
+
+38. Analytics
+
+Analytics should be considered for:
+
+page visits
+
+competition interest
+
+registration funnel
+
+merchandise funnel
+
+checkout abandonment
+
+submission completion
+
+Analytics implementation must respect applicable privacy requirements.
+
+Provider is unresolved.
+
+39. Admin & Operational Safety
+
+Administrative operations should be protected with:
+
+strong authentication
+
+authorization
+
+audit logs
+
+confirmation for destructive actions
+
+safe bulk-operation patterns
+
+pagination
+
+filtering
+
+clear status indicators
+
+Never expose administrative endpoints simply because a UI route is hidden.
+
+40. Future Scalability
+
+The architecture should be capable of extracting modules later if evidence requires it.
+
+Potential extraction candidates in the future:
+
+payment
+
+notification
+
+file processing
+
+search
+
+reporting
+
+But extraction should happen only when justified by:
+
+scale
+
+independent deployment needs
+
+team ownership
+
+reliability isolation
+
+operational requirements
+
+Microservices are not the default.
+
+41. Unresolved Architecture Decisions
+
+These MUST NOT be silently invented by AI.
+
+Final project identity/branding.
+
+Exact competition names and rules.
+
+Exact event names and rules.
+
+Authentication solution.
+
+Session strategy.
+
+Authorization model.
+
+Framework/version.
+
+ORM.
+
+Payment provider.
+
+Object storage provider.
+
+Email provider.
+
+Queue provider.
+
+Cache strategy.
+
+Deployment platform.
+
+Observability provider.
+
+Analytics provider.
+
+CMS requirement.
+
+Judging workflow.
+
+File size/type limits.
+
+Data retention policy.
+
+Each major decision should eventually receive an ADR.
+
+42. Architecture Decision Record Rules
+
+Create an ADR when a decision:
+
+affects architecture
+
+affects security
+
+affects data
+
+affects payment
+
+affects scalability
+
+introduces a major dependency
+
+is difficult to reverse
+
+ADR format:
+
+Context
+→ Alternatives
+→ Decision
+→ Rationale
+→ Consequences
+→ Validation
+
+Do not mark an AI suggestion as accepted without human approval.
+
+43. Development Phases
+
+Phase 0 — Discovery
+
+inspect repository
+
+inspect skills
+
+confirm product identity
+
+confirm requirements
+
+identify unknowns
+
+Phase 1 — Product Definition
+
+finalize pages
+
+finalize events
+
+finalize competitions
+
+finalize roles
+
+finalize user flows
+
+finalize submission rules
+
+finalize merchandise requirements
+
+Phase 2 — Architecture
+
+stack
+
+module boundaries
+
+database
+
+auth
+
+payment
+
+storage
+
+queue
+
+observability
+
+deployment
+
+Phase 3 — Design System
+
+visual direction
+
+tokens
+
+typography
+
+components
+
+responsive system
+
+motion system
+
+accessibility rules
+
+Phase 4 — Foundation
+
+application setup
+
+database
+
+authentication
+
+base UI
+
+error handling
+
+logging
+
+testing infrastructure
+
+Phase 5 — Product Modules
+
+Suggested order:
+
+Public content
+
+Identity
+
+Competitions
+
+Registration
+
+Submission
+
+Events
+
+Commerce
+
+Payment
+
+Notifications
+
+Administration
+
+Phase 6 — Quality
+
+unit tests
+
+integration tests
+
+E2E
+
+accessibility
+
+security review
+
+performance profiling
+
+Phase 7 — Production
+
+deployment
+
+monitoring
+
+backups
+
+recovery
+
+runbook
+
+incident procedures
+
+44. Definition of Done
+
+A feature is complete only if:
+
+requirement is satisfied
+
+architecture boundaries are preserved
+
+authorization is correct
+
+validation is correct
+
+appropriate tests exist
+
+error states exist
+
+loading/empty states exist where relevant
+
+responsive behavior is handled
+
+accessibility is considered
+
+performance impact is considered
+
+security impact is considered
+
+documentation is updated where required
+
+verification has been performed
+
+45. AI Implementation Protocol
+
+Before implementing any major feature, the AI must provide:
+
+Understanding
+
+What requirement is being implemented.
+
+Assumptions
+
+What is known versus assumed.
+
+Architecture Impact
+
+Which modules, database tables, APIs, or infrastructure are affected.
+
+Plan
+
+Ordered implementation steps.
+
+Risks
+
+Security, performance, reliability, UX, and data risks.
+
+Then implementation may begin only when no unresolved architectural blocker exists.
+
+After implementation:
+
+Verification
+
+Report:
+
+files changed
+
+tests run
+
+type/lint/build checks
+
+manual verification
+
+known limitations
+
+46. Final Principle
+
+The platform should not be built as a collection of pages.
+
+It should be built as a coherent product:
+
+Product
+  ↓
+UX
+  ↓
+Design System
+  ↓
+Application Architecture
+  ↓
+Domain Model
+  ↓
+Data
+  ↓
+Infrastructure
+  ↓
+Security
+  ↓
+Performance
+  ↓
+Observability
+  ↓
+Operations
+
+Visual polish is important.
+
+But the final quality bar is:
+
+beautiful + usable + fast + secure + reliable + maintainable.
+
+No AI agent should sacrifice one of these dimensions without explaining the trade-off.

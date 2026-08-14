@@ -24,6 +24,12 @@
   --color-gray-50: #f4f4f8;
   --color-white: #ffffff;
 
+  /* Brand Kit Colors (Custom) */
+  --color-bold-blue: #1e466b;
+  --color-light-blue: #67baf4;
+  --color-soft-white: #fafafa;
+  --color-jet-black: #0d0d0d;
+
   /* Biru (Warna Utama) */
   --color-blue-950: #0a1128;
   --color-blue-900: #0f1b3d;
@@ -154,6 +160,12 @@
 /* ---- TAILWIND THEME INTEGRATION ---- */
 @theme inline {
   /* Colors */
+  /* Custom Kit Colors */
+  --color-bold-blue: var(--color-bold-blue);
+  --color-light-blue: var(--color-light-blue);
+  --color-soft-white: var(--color-soft-white);
+  --color-jet-black: var(--color-jet-black);
+
   --color-background: var(--bg-primary);
   --color-foreground: var(--fg-primary);
   --color-brand: var(--brand-primary);
