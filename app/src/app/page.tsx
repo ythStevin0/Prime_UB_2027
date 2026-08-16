@@ -2,7 +2,6 @@
 
 import { useState, useCallback } from "react";
 import SplashScreen from "@frontend/components/SplashScreen";
-import DarkVeil from "@frontend/components/DarkVeil";
 import Navbar from "@frontend/components/Navbar";
 import HeroSection from "@frontend/components/sections/HeroSection";
 import AboutSection from "@frontend/components/sections/AboutSection";
@@ -60,17 +59,6 @@ export default function HomePage() {
     <>
       {showSplash && <SplashScreen onFinish={handleSplashFinish} />}
       
-      <div className="fixed inset-0 pointer-events-none" style={{ zIndex: -1 }}>
-        <DarkVeil
-          hueShift={0}
-          noiseIntensity={0}
-          scanlineIntensity={0}
-          speed={0.5}
-          scanlineFrequency={0}
-          warpAmount={0}
-        />
-      </div>
-
       <main className="flex-1 relative z-0">
         {/* Navbar */}
         <Navbar />
