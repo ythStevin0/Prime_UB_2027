@@ -227,6 +227,31 @@
   50% { box-shadow: 0 0 40px rgba(59, 109, 212, 0.3); }
 }
 
+/* Aurora Background Animation */
+@keyframes aurora-drift-1 {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(15vw, 10vh) scale(1.1); }
+  100% { transform: translate(5vw, 20vh) scale(0.95); }
+}
+
+@keyframes aurora-drift-2 {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(-10vw, 15vh) scale(1.15); }
+  100% { transform: translate(-5vw, -10vh) scale(1.05); }
+}
+
+@keyframes aurora-drift-3 {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(12vw, -8vh) scale(1.1); }
+  100% { transform: translate(-8vw, 5vh) scale(0.9); }
+}
+
+@keyframes aurora-drift-4 {
+  0%   { transform: translateX(-50%) translate(0, 0) scale(1); }
+  50%  { transform: translateX(-50%) translate(8vw, -12vh) scale(1.2); }
+  100% { transform: translateX(-50%) translate(-5vw, 8vh) scale(0.95); }
+}
+
 /* ---- BASE STYLES ---- */
 html {
   scroll-behavior: smooth;
