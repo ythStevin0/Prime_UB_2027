@@ -3,6 +3,7 @@
 import { ArrowRight, Download } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import PixelBlast from "@frontend/components/PixelBlast";
 
 /**
  * HeroSection — Split-layout hero seperti referensi IPFEST.
@@ -31,70 +32,29 @@ const fadeIn = {
 export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* ======= GEOMETRIC DECORATIONS (left side) ======= */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Big circle outline — kiri atas */}
-        <div
-          className="absolute -left-20 top-10 w-64 h-64 md:w-80 md:h-80 rounded-full border-2 opacity-10"
-          style={{ borderColor: "var(--color-light-blue)" }}
-        />
-        {/* Small circle outline — kiri tengah */}
-        <div
-          className="absolute left-32 top-24 w-8 h-8 rounded-full border-2 opacity-20"
-          style={{ borderColor: "var(--color-light-blue)" }}
-        />
-        {/* Triangle */}
-        <motion.div
-          className="absolute left-28 top-16 opacity-15"
-          animate={{ y: [0, -8, 0] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <div
-            className="w-0 h-0"
-            style={{
-              borderLeft: "14px solid transparent",
-              borderRight: "14px solid transparent",
-              borderBottom: "24px solid var(--color-light-blue)",
-            }}
-          />
-        </motion.div>
-        {/* Circle ring — bawah kiri */}
-        <div
-          className="absolute -left-8 bottom-32 w-40 h-40 md:w-56 md:h-56 rounded-full border-2 opacity-8"
-          style={{ borderColor: "var(--color-bold-blue)" }}
-        />
-        {/* Small dot cluster */}
-        <div
-          className="absolute left-48 bottom-40 w-3 h-3 rounded-full opacity-20"
-          style={{ background: "var(--color-light-blue)" }}
-        />
-        <div
-          className="absolute left-56 bottom-44 w-2 h-2 rounded-full opacity-15"
-          style={{ background: "var(--color-light-blue)" }}
+      {/* ======= PIXEL BLAST BACKGROUND ======= */}
+      <div className="absolute inset-0 z-0 pointer-events-auto opacity-70">
+        <PixelBlast
+          variant="square"
+          pixelSize={4}
+          color="#1e466b"
+          patternScale={2}
+          patternDensity={1.4}
+          pixelSizeJitter={0.4}
+          enableRipples
+          rippleSpeed={0.4}
+          rippleThickness={0.12}
+          rippleIntensityScale={1.5}
+          liquid={false}
+          liquidStrength={0.12}
+          liquidRadius={1.2}
+          liquidWobbleSpeed={5}
+          speed={1.65}
+          edgeFade={0.25}
+          transparent
         />
       </div>
 
-      {/* ======= CURVED WHITE/LIGHT AREA (right side — behind logo) ======= */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* SVG Curve divider */}
-        <svg
-          className="absolute right-0 top-0 h-full w-[55%] md:w-[48%] hidden md:block"
-          viewBox="0 0 600 900"
-          preserveAspectRatio="none"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M180 0 C80 200, 120 400, 60 600 C30 750, 100 850, 180 900 L600 900 L600 0 Z"
-            fill="rgba(250,250,250,0.04)"
-          />
-          <path
-            d="M180 0 C80 200, 120 400, 60 600 C30 750, 100 850, 180 900"
-            stroke="rgba(103,186,244,0.1)"
-            strokeWidth="1"
-          />
-        </svg>
-      </div>
 
       {/* ======= CONTENT ======= */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 py-20">
@@ -176,31 +136,6 @@ export default function HeroSection() {
                 Download Invitation
               </button>
             </motion.div>
-
-            {/* Stats */}
-            <motion.div
-              className="flex gap-10 mt-12"
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={4}
-            >
-              {[
-                { value: "7", label: "Kompetisi" },
-                { value: "5", label: "Event" },
-                { value: "1000+", label: "Peserta" },
-              ].map((stat) => (
-                <div key={stat.label}>
-                  <div className="text-2xl md:text-3xl font-bold text-gradient-brand">
-                    {stat.value}
-                  </div>
-                  <div className="text-xs mt-1" style={{ color: "var(--fg-muted)" }}>
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </motion.div>
           </div>
 
           {/* ---- RIGHT COLUMN: Logo ---- */}
@@ -212,14 +147,7 @@ export default function HeroSection() {
             viewport={{ once: true }}
           >
             <div className="relative">
-              {/* Glow behind logo */}
-              <div
-                className="absolute inset-0 blur-[80px] opacity-20 rounded-full scale-110"
-                style={{
-                  background:
-                    "radial-gradient(circle, rgba(255,140,50,0.4) 0%, rgba(139,92,246,0.2) 50%, transparent 70%)",
-                }}
-              />
+
               {/* Logo */}
               <motion.div
                 animate={{ y: [0, -10, 0] }}
