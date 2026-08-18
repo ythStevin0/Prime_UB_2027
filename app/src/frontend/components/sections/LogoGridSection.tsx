@@ -112,7 +112,7 @@ export default function LogoGridSection({
         {variant === "grid" ? (
           /* Bento Box Style for Organized By */
           <motion.div
-            className="relative glass rounded-4xl md:rounded-[3rem] py-8 md:py-12 px-8 md:px-16 shadow-2xl border border-white/10 overflow-hidden group"
+            className="relative glass rounded-none py-8 md:py-12 px-8 md:px-16 shadow-2xl border border-white/10 overflow-hidden group"
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"

@@ -48,7 +48,7 @@ export default function Navbar() {
         {/* CTA Button */}
         <div className="hidden md:flex">
           <button
-            className="px-5 py-2.5 rounded-xl font-semibold text-sm text-white transition-all duration-300 hover:scale-105"
+            className="px-5 py-2.5 rounded-none font-semibold text-sm text-white transition-all duration-300 hover:scale-105"
             style={{
               background: "var(--gradient-brand-vivid)",
               boxShadow: "var(--shadow-glow-blue)",

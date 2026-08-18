@@ -4,10 +4,8 @@ import { useState, useCallback } from "react";
 import SplashScreen from "@frontend/components/SplashScreen";
 import Navbar from "@frontend/components/Navbar";
 import HeroSection from "@frontend/components/sections/HeroSection";
-import AboutSection from "@frontend/components/sections/AboutSection";
-import CompetitionsSection from "@frontend/components/sections/CompetitionsSection";
+import AboutCompetitionsSection from "@frontend/components/sections/AboutCompetitionsSection";
 import EventsSection from "@frontend/components/sections/EventsSection";
-import TimelineSection from "@frontend/components/sections/TimelineSection";
 import LogoGridSection from "@frontend/components/sections/LogoGridSection";
 import FooterSection from "@frontend/components/sections/FooterSection";
 
@@ -66,17 +64,11 @@ export default function HomePage() {
         {/* Hero */}
         <HeroSection />
 
-        {/* About */}
-        <AboutSection />
-
-        {/* Competitions */}
-        <CompetitionsSection />
+        {/* About & Competitions (Split Screen) */}
+        <AboutCompetitionsSection />
 
         {/* Events */}
         <EventsSection />
-
-        {/* Timeline */}
-        <TimelineSection />
 
         {/* Organized By */}
         <LogoGridSection

@@ -55,6 +55,9 @@ export default function HeroSection() {
         />
       </div>
 
+      {/* Gradient fade to next section to avoid sharp cutoff */}
+      <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-[#050505] to-transparent z-0 pointer-events-none" />
+
 
       {/* ======= CONTENT ======= */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 py-20">
@@ -63,55 +66,49 @@ export default function HeroSection() {
           <div className="order-2 md:order-1">
             {/* Badge */}
             <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8"
+              className="flex items-center gap-3 mb-6"
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               custom={0}
             >
-              <span
-                className="w-2 h-2 rounded-full animate-pulse"
-                style={{ background: "var(--status-success)" }}
-              />
-              <span className="text-sm font-medium" style={{ color: "var(--fg-secondary)" }}>
-                Pendaftaran Dibuka
+              <div className="w-1 h-3 bg-cyan-400" />
+              <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-cyan-400">
+                PENDAFTARAN DIBUKA
               </span>
             </motion.div>
 
             {/* Heading */}
             <motion.h1
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 leading-[1.1]"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-5 leading-[1.1] flex flex-col gap-1"
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               custom={1}
             >
-              <span style={{ color: "var(--fg-primary)" }}>#</span>
-              <span className="text-gradient">PRIME</span>
-              <span style={{ color: "var(--fg-primary)" }}>UB</span>
-              <span className="text-gradient">2027</span>
+              <span className="text-white">Welcome to</span>
+              <span className="text-cyan-400 drop-shadow-[0_0_15px_rgba(34,211,238,0.5)]">
+                PRIME UB 2027!
+              </span>
             </motion.h1>
 
             {/* Tagline */}
             <motion.p
-              className="text-base md:text-lg max-w-lg mb-8 leading-relaxed"
-              style={{ color: "var(--fg-secondary)" }}
+              className="text-sm md:text-base max-w-lg mb-8 leading-relaxed text-gray-300"
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               custom={2}
             >
-              PRIME UB 2027 sebagai wadah transformatif di mana inovasi riset, wawasan akademis,
-              dan keahlian industri berpadu untuk membentuk solusi energi masa depan melalui
-              kompetisi dan event berkelas nasional.
+              PRIME UB 2027 sebagai <span className="font-semibold text-yellow-400">wadah transformatif</span> di mana <span className="font-semibold text-cyan-400">inovasi riset</span>, wawasan akademis, dan <span className="font-semibold text-yellow-400">keahlian industri</span> berpadu untuk membentuk <span className="font-semibold text-cyan-400">solusi energi masa depan</span> melalui kompetisi nasional.
             </motion.p>
 
             {/* CTA Buttons */}
             <motion.div
-              className="flex flex-col sm:flex-row gap-4"
+              className="flex flex-col sm:flex-row gap-3"
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
@@ -119,18 +116,13 @@ export default function HeroSection() {
               custom={3}
             >
               <button
-                className="group flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-white transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
-                style={{
-                  background: "var(--gradient-brand-vivid)",
-                  boxShadow: "var(--shadow-glow-blue)",
-                }}
+                className="group flex items-center justify-center gap-2 px-6 py-3 rounded-none text-sm font-bold text-black transition-all duration-300 hover:bg-cyan-300 active:scale-95 cursor-pointer bg-cyan-400"
               >
                 Jelajahi Kompetisi
-                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
               <button
-                className="flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold glass transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
-                style={{ color: "var(--fg-secondary)" }}
+                className="flex items-center justify-center gap-2 px-6 py-3 rounded-none text-sm font-semibold transition-all duration-300 hover:bg-white/5 active:scale-95 cursor-pointer border border-[#333] text-white hover:border-gray-400"
               >
                 <Download className="w-4 h-4" />
                 Download Invitation
@@ -158,7 +150,7 @@ export default function HeroSection() {
                   alt="PRIME UB 2027 Logo"
                   width={420}
                   height={420}
-                  className="relative z-10 drop-shadow-2xl rounded-3xl"
+                  className="relative z-10 drop-shadow-2xl rounded-none"
                   style={{
                     maxWidth: "100%",
                     height: "auto",
