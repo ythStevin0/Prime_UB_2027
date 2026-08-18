@@ -42,7 +42,7 @@ export default function FooterSection() {
             <a
               key={social}
               href="#"
-              className="px-4 py-2 rounded-lg glass text-xs font-medium transition-all duration-300 hover:scale-105"
+              className="px-4 py-2 rounded-none glass text-xs font-medium transition-all duration-300 hover:scale-105"
               style={{ color: "var(--fg-secondary)" }}
             >
               {social}
