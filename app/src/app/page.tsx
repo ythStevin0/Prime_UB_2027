@@ -5,6 +5,7 @@ import SplashScreen from "@frontend/components/SplashScreen";
 import Navbar from "@frontend/components/Navbar";
 import HeroSection from "@frontend/components/sections/HeroSection";
 import AboutCompetitionsSection from "@frontend/components/sections/AboutCompetitionsSection";
+import MainEventsSection from "@frontend/components/sections/MainEventsSection";
 import EventsSection from "@frontend/components/sections/EventsSection";
 import LogoGridSection from "@frontend/components/sections/LogoGridSection";
 import FooterSection from "@frontend/components/sections/FooterSection";
@@ -67,7 +68,10 @@ export default function HomePage() {
         {/* About & Competitions (Split Screen) */}
         <AboutCompetitionsSection />
 
-        {/* Events */}
+        {/* Main Events Grid */}
+        <MainEventsSection />
+
+        {/* Events Timeline Map */}
         <EventsSection />
 
         {/* Organized By */}

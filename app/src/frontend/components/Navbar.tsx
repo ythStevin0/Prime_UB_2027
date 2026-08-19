@@ -1,5 +1,12 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { competitionsData } from "../data/competitions";
+import { eventsData } from "../data/events";
+import { ChevronDown } from "lucide-react";
+import StaggeredMenu from "./StaggeredMenu";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -38,11 +45,45 @@ export default function Navbar() {
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex flex-1 items-center justify-center gap-8">
-          <a href="#" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Beranda</a>
-          <a href="#about" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Tentang</a>
-          <a href="#organized-by" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Penyelenggara</a>
-          <a href="#media-partner" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Media Partner</a>
+        <div className="hidden md:flex flex-1 items-center justify-center gap-6 lg:gap-8">
+          <Link href="/" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Home</Link>
+          <Link href="/#about-competitions" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">About</Link>
+          
+          {/* Competitions Dropdown */}
+          <div className="relative group">
+            <button className="flex items-center gap-1 text-sm font-medium text-gray-300 hover:text-white transition-colors py-4">
+              Competitions <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
+            </button>
+            <div className="absolute top-full left-1/2 -translate-x-1/2 mt-0 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 bg-[#0a0a0a]/95 backdrop-blur-md border border-white/10 shadow-2xl flex flex-col py-2 rounded-none">
+              {competitionsData.map((comp) => (
+                <Link 
+                  key={comp.id} 
+                  href={`/competitions/${comp.slug}`}
+                  className="px-5 py-2.5 text-sm text-gray-400 hover:text-cyan-400 hover:bg-white/5 transition-colors border-l-2 border-transparent hover:border-cyan-400"
+                >
+                  {comp.title}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Events Dropdown */}
+          <div className="relative group">
+            <button className="flex items-center gap-1 text-sm font-medium text-gray-300 hover:text-white transition-colors py-4">
+              Events <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
+            </button>
+            <div className="absolute top-full left-1/2 -translate-x-1/2 mt-0 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 bg-[#0a0a0a]/95 backdrop-blur-md border border-white/10 shadow-2xl flex flex-col py-2 rounded-none">
+              {eventsData.map((evt) => (
+                <Link 
+                  key={evt.id} 
+                  href={`/events/${evt.slug}`}
+                  className="px-5 py-2.5 text-sm text-gray-400 hover:text-blue-400 hover:bg-white/5 transition-colors border-l-2 border-transparent hover:border-blue-400"
+                >
+                  {evt.title} {evt.titleHighlight}
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* CTA Button */}
@@ -60,11 +101,28 @@ export default function Navbar() {
 
         {/* Mobile Menu Button (Hamburger) */}
         <div className="md:hidden flex items-center">
-          <button className="text-gray-300 hover:text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
-            </svg>
-          </button>
+          <StaggeredMenu
+            isFixed={true}
+            position="right"
+            items={[
+              { label: 'Home', ariaLabel: 'Home', link: '/' },
+              { label: 'About', ariaLabel: 'About', link: '/#about-competitions' },
+              { label: 'Competitions', ariaLabel: 'Competitions', link: '/#about-competitions' },
+              { label: 'Events', ariaLabel: 'Events', link: '/#main-events' }
+            ]}
+            socialItems={[
+              { label: 'Instagram', link: 'https://instagram.com/primeub' },
+              { label: 'LinkedIn', link: 'https://linkedin.com/company/primeub' }
+            ]}
+            displaySocials
+            displayItemNumbering={true}
+            menuButtonColor="#e9e9ef"
+            openMenuButtonColor="#fff"
+            changeMenuColorOnOpen={true}
+            colors={['#0a0a0a', '#1e466b', '#22d3ee']}
+            logoUrl=""
+            accentColor="#22d3ee"
+          />
         </div>
       </div>
     </nav>
