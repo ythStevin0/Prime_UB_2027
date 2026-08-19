@@ -88,7 +88,8 @@ export default function Navbar() {
 
         {/* CTA Button */}
         <div className="hidden md:flex">
-          <button
+          <Link
+            href="/register"
             className="px-5 py-2.5 rounded-none font-semibold text-sm text-white transition-all duration-300 hover:scale-105"
             style={{
               background: "var(--gradient-brand-vivid)",
@@ -96,7 +97,7 @@ export default function Navbar() {
             }}
           >
             Daftar Sekarang
-          </button>
+          </Link>
         </div>
 
         {/* Mobile Menu Button (Hamburger) */}

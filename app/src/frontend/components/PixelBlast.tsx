@@ -699,4 +699,4 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
   );
 };
 
-export default PixelBlast;
+export default React.memo(PixelBlast);
