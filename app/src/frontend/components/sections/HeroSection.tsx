@@ -56,7 +56,7 @@ export default function HeroSection() {
       </div>
 
       {/* Gradient fade to next section to avoid sharp cutoff */}
-      <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-[#050505] to-transparent z-0 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-full h-48 bg-linear-to-t from-[#050505] to-transparent z-0 pointer-events-none" />
 
 
       {/* ======= CONTENT ======= */}

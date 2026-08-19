@@ -1,47 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Target, Users, Lightbulb } from "lucide-react";
-import Image from "next/image";
-
-const competitions = [
-  {
-    id: "comp-1",
-    label: "COMPETITION",
-    title: "Business Case",
-    description: "Pecahkan studi kasus industri energi",
-  },
-  {
-    id: "comp-2",
-    label: "COMPETITION",
-    title: "Geothermal",
-    description: "Analisis potensi pengembangan energi",
-  },
-  {
-    id: "comp-3",
-    label: "INNOVATION",
-    title: "Smart Innovation",
-    description: "Rancang inovasi teknologi tepat guna",
-  },
-  {
-    id: "comp-4",
-    label: "ENGINEERING",
-    title: "Oil Rig Design",
-    description: "Model miniatur anjungan lepas pantai",
-  },
-  {
-    id: "comp-5",
-    label: "ACADEMIC",
-    title: "Paper & Poster",
-    description: "Tuangkan gagasan melalui karya tulis",
-  },
-  {
-    id: "comp-6",
-    label: "ENGINEERING",
-    title: "Mud Design",
-    description: "Formulasi lumpur pemboran terbaik",
-  },
-];
+import { ArrowRight, Target, Lightbulb } from "lucide-react";
+import Link from "next/link";
+import { competitionsData } from "../../data/competitions";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -89,15 +51,15 @@ export default function AboutCompetitionsSection() {
 
           {/* Competitions Grid (Matching Reference) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {competitions.map((comp, i) => (
+            {competitionsData.map((comp, i) => (
+              <Link href={`/competitions/${comp.slug}`} key={comp.id}>
               <motion.div
-                key={comp.id}
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-50px" }}
                 custom={i + 1}
-                className="group p-5 border border-white/5 bg-white/5 rounded-none hover:bg-white/10 hover:border-blue-500/30 transition-all duration-300 cursor-pointer"
+                className="group h-full p-5 border border-white/5 bg-white/5 rounded-none hover:bg-white/10 hover:border-blue-500/30 transition-all duration-300 cursor-pointer"
               >
                 <p className="text-[10px] font-bold uppercase tracking-wider text-blue-400 mb-2">
                   {comp.label}
@@ -106,9 +68,10 @@ export default function AboutCompetitionsSection() {
                   {comp.title}
                 </h3>
                 <p className="text-xs text-gray-400 line-clamp-2">
-                  {comp.description}
+                  {comp.shortDesc}
                 </p>
               </motion.div>
+              </Link>
             ))}
           </div>
 
@@ -133,7 +96,7 @@ export default function AboutCompetitionsSection() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="relative w-full min-h-[600px] border border-white/10 bg-[#0a0a0a] rounded-none overflow-hidden group flex flex-col mt-8 lg:mt-0"
+          className="relative w-full min-h-150 border border-white/10 bg-[#0a0a0a] rounded-none overflow-hidden group flex flex-col mt-8 lg:mt-0"
         >
           {/* Glassmorphism Abstract Background (Sebagai ganti gambar daun) */}
           <div className="absolute inset-0 z-0 pointer-events-none">
