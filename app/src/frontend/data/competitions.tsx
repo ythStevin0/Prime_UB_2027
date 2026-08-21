@@ -4,6 +4,7 @@ import { Briefcase, Globe, FlaskConical, Wrench, FileText, Droplets } from "luci
 export type TimelineEvent = {
   date: string;
   title: string;
+  description?: string;
 };
 
 export type CompetitionData = {
@@ -20,11 +21,11 @@ export type CompetitionData = {
 };
 
 const defaultTimeline: TimelineEvent[] = [
-  { date: "1 - 15 Agustus 2027", title: "Pendaftaran Gelombang 1" },
-  { date: "16 - 31 Agustus 2027", title: "Pendaftaran Gelombang 2" },
-  { date: "15 September 2027", title: "Batas Pengumpulan Berkas" },
-  { date: "30 September 2027", title: "Pengumuman Finalis" },
-  { date: "15 Oktober 2027", title: "Presentasi Final (Offline)" },
+  { date: "1 - 15 Agustus 2027", title: "Pendaftaran Gelombang 1", description: "Pendaftaran awal dengan biaya lebih terjangkau." },
+  { date: "16 - 31 Agustus 2027", title: "Pendaftaran Gelombang 2", description: "Pendaftaran reguler dengan batas kuota akhir." },
+  { date: "15 September 2027", title: "Batas Pengumpulan Berkas", description: "Batas akhir pengumpulan proposal atau karya final." },
+  { date: "30 September 2027", title: "Pengumuman Finalis", description: "Pengumuman 10 tim terbaik yang akan bertanding di babak final." },
+  { date: "15 Oktober 2027", title: "Presentasi Final (Offline)", description: "Acara puncak presentasi secara langsung di lokasi acara." },
 ];
 
 const defaultMapEmbedUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.4646736203173!2d112.61332811477755!3d-7.950917994273617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7882794eb09d85%3A0x6b4f72782b6c93b6!2sFakultas%20Teknik%20Universitas%20Brawijaya!5e0!3m2!1sen!2sid!4v1692285117325!5m2!1sen!2sid";
