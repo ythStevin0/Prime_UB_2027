@@ -115,12 +115,7 @@ export default function HeroSection() {
               viewport={{ once: true }}
               custom={3}
             >
-              <button
-                className="group flex items-center justify-center gap-2 px-6 py-3 rounded-none text-sm font-bold text-black transition-all duration-300 hover:bg-cyan-300 active:scale-95 cursor-pointer bg-cyan-400"
-              >
-                Jelajahi Kompetisi
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </button>
+
               <button
                 className="flex items-center justify-center gap-2 px-6 py-3 rounded-none text-sm font-semibold transition-all duration-300 hover:bg-white/5 active:scale-95 cursor-pointer border border-[#333] text-white hover:border-gray-400"
               >

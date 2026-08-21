@@ -4,6 +4,7 @@ import { BookOpen, Mic, Trophy } from "lucide-react";
 export type TimelineEvent = {
   date: string;
   title: string;
+  description?: string;
 };
 
 export type EventData = {
@@ -44,10 +45,10 @@ export const eventsData: EventData[] = [
     buttonText: "Learn More",
     reverse: false,
     timeline: [
-      { date: "5 September 2027", title: "Registrasi Workshop Dibuka" },
-      { date: "10 September 2027", title: "Batas Akhir Pendaftaran" },
-      { date: "15 September 2027", title: "Pelaksanaan Day 1: Fundamental" },
-      { date: "16 September 2027", title: "Pelaksanaan Day 2: Advanced Case" },
+      { date: "5 September 2027", title: "Registrasi Awal", description: "Pendaftaran fase pertama dengan harga spesial." },
+      { date: "15 September 2027", title: "Batas Akhir Registrasi", description: "Penutupan pendaftaran peserta pameran." },
+      { date: "20 September 2027", title: "Technical Meeting", description: "Pertemuan teknis untuk semua peserta pameran." },
+      { date: "25 September 2027", title: "Hari H Pameran", description: "Puncak acara pameran karya teknologi." },
     ],
     mapEmbedUrl: defaultMapEmbedUrl,
     theme: {
@@ -70,9 +71,9 @@ export const eventsData: EventData[] = [
     buttonText: "Learn More",
     reverse: true,
     timeline: [
-      { date: "1 Oktober 2027", title: "Pengumuman Pembicara" },
-      { date: "5 Oktober 2027", title: "Penjualan Tiket Gelombang 1" },
-      { date: "12 Oktober 2027", title: "Pelaksanaan Talkshow" },
+      { date: "10 Agustus 2027", title: "Pendaftaran Dibuka", description: "Mulai daftar untuk mengikuti workshop intensif ini." },
+      { date: "20 Agustus 2027", title: "Penutupan Pendaftaran", description: "Batas akhir pendaftaran peserta workshop." },
+      { date: "25 Agustus 2027", title: "Pelaksanaan Workshop", description: "Sesi pelatihan langsung bersama para ahli." },
     ],
     mapEmbedUrl: defaultMapEmbedUrl,
     theme: {

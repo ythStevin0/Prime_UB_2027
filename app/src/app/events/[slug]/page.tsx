@@ -3,6 +3,7 @@ import { eventsData } from "@/frontend/data/events";
 import Navbar from "@/frontend/components/Navbar";
 import FooterSection from "@/frontend/components/sections/FooterSection";
 import PixelBlast from "@/frontend/components/PixelBlast";
+import TimelineSection from "@/frontend/components/sections/TimelineSection";
 
 export default async function EventDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -68,21 +69,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
       </section>
 
       {/* === TIMELINE SECTION === */}
-      <section className="py-24 px-6 md:px-24 bg-white/2 border-t border-b border-white/5">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-bold mb-12 text-cyan-400 text-center">Event Timeline</h2>
-          
-          <div className="relative border-l-2 border-blue-500/30 ml-4 md:ml-12 space-y-12">
-            {evt.timeline.map((item, idx) => (
-              <div key={idx} className="relative pl-8 md:pl-12">
-                <div className="absolute -left-2.25 top-1.5 w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.8)]" />
-                <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
-                <p className="text-cyan-400 font-mono text-sm">{item.date}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <TimelineSection timeline={evt.timeline} title={evt.title} />
 
       {/* === MAPS SECTION === */}
       <section className="py-24 px-6 md:px-24 max-w-6xl mx-auto">

@@ -3,6 +3,7 @@ import { competitionsData } from "@/frontend/data/competitions";
 import Navbar from "@/frontend/components/Navbar";
 import FooterSection from "@/frontend/components/sections/FooterSection";
 import PixelBlast from "@/frontend/components/PixelBlast";
+import TimelineSection from "@/frontend/components/sections/TimelineSection";
 
 export default async function CompetitionDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -58,6 +59,7 @@ export default async function CompetitionDetailPage({ params }: { params: Promis
         </div>
       </section>
 
+
       {/* === ABOUT SECTION === */}
       <section id="about" className="py-24 px-6 md:px-24 max-w-5xl mx-auto border-t border-white/5">
         <h2 className="text-3xl font-bold mb-8 text-blue-400">About the Competition</h2>
@@ -69,23 +71,7 @@ export default async function CompetitionDetailPage({ params }: { params: Promis
       </section>
 
       {/* === TIMELINE SECTION === */}
-      <section className="py-24 px-6 md:px-24 bg-white/2 border-t border-b border-white/5">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-bold mb-12 text-cyan-400 text-center">Competition Timeline</h2>
-          
-          <div className="relative border-l-2 border-blue-500/30 ml-4 md:ml-12 space-y-12">
-            {comp.timeline.map((event, idx) => (
-              <div key={idx} className="relative pl-8 md:pl-12">
-                {/* Timeline Dot */}
-                <div className="absolute -left-2.25 top-1.5 w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.8)]" />
-                
-                <h3 className="text-xl font-bold text-white mb-2">{event.title}</h3>
-                <p className="text-cyan-400 font-mono text-sm">{event.date}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <TimelineSection timeline={comp.timeline} title={comp.title} />
 
       {/* === MAPS SECTION === */}
       <section className="py-24 px-6 md:px-24 max-w-6xl mx-auto">
