@@ -7,6 +7,7 @@ export interface StaggeredMenuItem {
   label: string;
   ariaLabel: string;
   link: string;
+  subItems?: { label: string; link: string; isHeader?: boolean }[];
 }
 export interface StaggeredMenuSocialItem {
   label: string;
@@ -49,6 +50,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   onMenuClose
 }: StaggeredMenuProps) => {
   const [open, setOpen] = useState(false);
+  const [expandedItem, setExpandedItem] = useState<string | null>(null);
   const openRef = useRef(false);
 
   const panelRef = useRef<HTMLDivElement | null>(null);
@@ -475,17 +477,64 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
             >
               {items && items.length ? (
                 items.map((it, idx) => (
-                  <li className="sm-panel-itemWrap relative overflow-hidden leading-none" key={it.label + idx}>
-                    <a
-                      className="sm-panel-item relative text-gray-200 font-bold text-3xl md:text-4xl cursor-pointer leading-none tracking-tight uppercase transition-[background,color] duration-150 ease-linear inline-block no-underline pr-[1.4em] font-sans"
-                      href={it.link}
-                      aria-label={it.ariaLabel}
-                      data-index={idx + 1}
-                    >
-                      <span className="sm-panel-itemLabel inline-block origin-[50%_100%] will-change-transform">
-                        {it.label}
-                      </span>
-                    </a>
+                  <li className="sm-panel-itemWrap relative overflow-hidden leading-none flex flex-col" key={it.label + idx}>
+                    <div className="flex items-center justify-between w-full">
+                      <a
+                        className="sm-panel-item relative text-gray-200 font-bold text-3xl md:text-4xl cursor-pointer leading-none tracking-tight uppercase transition-[background,color] duration-150 ease-linear inline-block no-underline pr-[1.4em] font-sans"
+                        href={it.link}
+                        aria-label={it.ariaLabel}
+                        data-index={idx + 1}
+                        onClick={(e) => {
+                          if (it.subItems) {
+                            e.preventDefault();
+                            setExpandedItem(expandedItem === it.label ? null : it.label);
+                          } else {
+                            toggleMenu();
+                          }
+                        }}
+                      >
+                        <span className="sm-panel-itemLabel inline-block origin-[50%_100%] will-change-transform">
+                          {it.label}
+                        </span>
+                      </a>
+                      {it.subItems && (
+                        <button 
+                          className="text-gray-400 p-2 ml-auto"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setExpandedItem(expandedItem === it.label ? null : it.label);
+                          }}
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-300 ${expandedItem === it.label ? 'rotate-180' : ''}`}><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                      )}
+                    </div>
+                    
+                    {it.subItems && (
+                      <div
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          expandedItem === it.label ? 'max-h-125 mt-6 mb-4 opacity-100' : 'max-h-0 mt-0 mb-0 opacity-0'
+                        }`}
+                      >
+                        <ul className="flex flex-col gap-4 pl-4 border-l-2 border-white/20">
+                          {it.subItems.map((sub, j) => (
+                            <li key={j} className="overflow-hidden">
+                              {sub.isHeader ? (
+                                <span className="block text-xs font-bold text-blue-400 uppercase tracking-wider mt-2 mb-1">{sub.label}</span>
+                              ) : (
+                                <a 
+                                  href={sub.link} 
+                                  onClick={closeMenu}
+                                  className="text-xl md:text-2xl text-gray-400 hover:text-white transition-colors font-medium font-sans uppercase block py-1"
+                                >
+                                  {sub.label}
+                                </a>
+                              )}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                   </li>
                 ))
               ) : (

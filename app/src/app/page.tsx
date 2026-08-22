@@ -74,14 +74,6 @@ export default function HomePage() {
         {/* Events Timeline Map */}
         <EventsSection />
 
-        {/* Organized By */}
-        <LogoGridSection
-          id="organized-by"
-          title="Organized By"
-          items={organizedBy}
-          columns={3}
-        />
-
         {/* Supported By */}
         <LogoGridSection
           id="supported-by"

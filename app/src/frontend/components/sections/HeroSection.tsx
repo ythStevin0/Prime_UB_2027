@@ -58,6 +58,29 @@ export default function HeroSection() {
       {/* Gradient fade to next section to avoid sharp cutoff */}
       <div className="absolute bottom-0 left-0 w-full h-48 bg-linear-to-t from-[#050505] to-transparent z-0 pointer-events-none" />
 
+      {/* ======= ORGANIZED BY (Bottom of Hero) ======= */}
+      <div className="absolute bottom-0 left-0 w-full z-20 pb-6 md:pb-8 pt-24 bg-linear-to-t from-[#050505] to-transparent">
+        <motion.div 
+          className="max-w-7xl mx-auto px-6 md:px-12 flex justify-center gap-12 md:gap-32 items-center"
+          variants={fadeIn}
+          initial="hidden"
+          animate="visible"
+        >
+          {[
+            { name: "Teknik Perminyakan UB", id: "T" },
+            { name: "HMTM FT UB", id: "H" },
+            { name: "BEM FT UB", id: "B" }
+          ].map((item) => (
+            <div key={item.name} className="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity duration-300">
+              <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#161c28] border border-white/10 flex items-center justify-center">
+                <span className="text-sm md:text-base font-bold text-blue-400">{item.id}</span>
+              </div>
+              <span className="text-xs md:text-sm font-medium text-gray-400">{item.name}</span>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+
 
       {/* ======= CONTENT ======= */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 py-20">
@@ -115,7 +138,6 @@ export default function HeroSection() {
               viewport={{ once: true }}
               custom={3}
             >
-
               <button
                 className="flex items-center justify-center gap-2 px-6 py-3 rounded-none text-sm font-semibold transition-all duration-300 hover:bg-white/5 active:scale-95 cursor-pointer border border-[#333] text-white hover:border-gray-400"
               >

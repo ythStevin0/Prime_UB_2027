@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Target, Lightbulb } from "lucide-react";
+import { ArrowRight, Target, Zap } from "lucide-react";
 import Link from "next/link";
 import { competitionsData } from "../../data/competitions";
 
@@ -117,18 +117,18 @@ export default function AboutCompetitionsSection() {
                 What Is PRIME?
               </p>
               <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
-                Empowering The Next <br />
+                Pioneering <br />
                 <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-cyan-300">
-                  Energy Leaders.
+                  Energy Resilience.
                 </span>
               </h3>
               
               <div className="space-y-6 text-gray-300 text-sm md:text-base leading-relaxed">
                 <p>
-                  <strong className="text-blue-400">PRIME</strong> (Petroleum Research and Innovation to Magnify Engineers) adalah acara tahunan terbesar yang diselenggarakan oleh mahasiswa Teknik Perminyakan Universitas Brawijaya. 
+                  <strong className="text-blue-400">PRIME</strong>, short for Petroleum Research & Innovation to Magnify Engineers, is an annual event organized by SPE UB SC that brings together university students from across Indonesia. 
                 </p>
                 <p>
-                  Kami menghadirkan kompetisi, seminar, dan event yang mempertemukan talenta muda dari seluruh Indonesia untuk memecahkan tantangan nyata di sektor energi global.
+                  PRIME provides students with opportunities to develop their knowledge, exchange ideas, and explore various topics related to the energy industry through competitions, seminars, and other activities.
                 </p>
               </div>
             </div>
@@ -137,16 +137,16 @@ export default function AboutCompetitionsSection() {
             <div className="mt-12 pt-8 border-t border-white/10 grid grid-cols-2 gap-6">
               <div>
                 <Target className="w-6 h-6 text-blue-400 mb-3" />
-                <h4 className="text-white font-bold mb-1">Vision</h4>
-                <p className="text-xs text-gray-400 leading-relaxed">
-                  Menjadi wadah pengembangan kompetensi dan inovasi terdepan.
+                <h4 className="text-white font-bold mb-1">Theme</h4>
+                <p className="text-gray-500 text-xs leading-relaxed">
+                  Strategic Innovation and Sustainable Solutions in the Dynamic Energy Sector.
                 </p>
               </div>
               <div>
-                <Lightbulb className="w-6 h-6 text-cyan-400 mb-3" />
-                <h4 className="text-white font-bold mb-1">Innovation</h4>
-                <p className="text-xs text-gray-400 leading-relaxed">
-                  Memperkenalkan teknologi & riset terbaru di bidang energi.
+                <Zap className="w-6 h-6 text-cyan-400 mb-3" />
+                <h4 className="text-white font-bold mb-1">Impact</h4>
+                <p className="text-gray-500 text-xs leading-relaxed">
+                  Generate scientifically grounded, actionable ideas for the energy transition.
                 </p>
               </div>
             </div>

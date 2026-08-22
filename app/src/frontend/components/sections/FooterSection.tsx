@@ -29,8 +29,8 @@ export const TextHoverEffect = ({
   useEffect(() => {
     if (svgRef.current && cursor.x !== null && cursor.y !== null) {
       const svgRect = svgRef.current.getBoundingClientRect();
-      const cxPercentage = ((cursor.x - svgRect.left) / svgRect.width) * 100;
-      const cyPercentage = ((cursor.y - svgRect.top) / svgRect.height) * 100;
+      const cxPercentage = svgRect.width ? ((cursor.x - svgRect.left) / svgRect.width) * 100 : 50;
+      const cyPercentage = svgRect.height ? ((cursor.y - svgRect.top) / svgRect.height) * 100 : 50;
       setMaskPosition({
         cx: `${cxPercentage}%`,
         cy: `${cyPercentage}%`,
@@ -165,10 +165,21 @@ export default function FooterSection() {
     },
     {
       title: "Events",
-      links: [
-        { label: "Pre-Event Workshop", href: "/events/pre-event-workshop" },
-        { label: "Main Event Talkshow", href: "/events/main-event-talkshow" },
-        { label: "Grand Exhibition", href: "/events/grand-exhibition" },
+      categories: [
+        {
+          name: "Industry Exposure",
+          links: [
+            { label: "Pre-Event Workshop", href: "/events/pre-event-workshop" },
+            { label: "Grand Exhibition", href: "/events/grand-exhibition" },
+          ],
+        },
+        {
+          name: "Networking & Engagement",
+          links: [
+            { label: "Main Event Talkshow", href: "/events/main-event-talkshow" },
+            { label: "Awarding Night", href: "/events/awarding-night" },
+          ],
+        },
       ],
     },
   ];
@@ -200,8 +211,8 @@ export default function FooterSection() {
   ];
 
   return (
-    <footer className="bg-[#0F0F11]/10 relative h-fit rounded-3xl overflow-hidden m-4 md:m-8 mt-24">
-      <div className="max-w-7xl mx-auto p-8 md:p-14 z-40 relative">
+    <footer className="bg-[#0F0F11] relative w-full min-h-screen flex flex-col justify-end overflow-hidden border-t border-white/5 pt-12">
+      <div className="max-w-7xl mx-auto w-full px-8 md:px-14 z-40 relative flex-1 flex flex-col justify-between">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-8 lg:gap-16 pb-12">
           {/* Brand section */}
           <div className="flex flex-col space-y-4">
@@ -219,18 +230,45 @@ export default function FooterSection() {
               <h4 className="text-white text-lg font-semibold mb-6">
                 {section.title}
               </h4>
-              <ul className="space-y-3">
-                {section.links.map((link) => (
-                  <li key={link.label} className="relative">
-                    <a
-                      href={link.href}
-                      className="text-gray-400 hover:text-[#3ca2fa] transition-colors"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+              
+              {section.links && (
+                <ul className="space-y-3">
+                  {section.links.map((link) => (
+                    <li key={link.label} className="relative">
+                      <a
+                        href={link.href}
+                        className="text-gray-400 hover:text-[#3ca2fa] transition-colors"
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {section.categories && (
+                <div className="flex flex-col space-y-6">
+                  {section.categories.map((category) => (
+                    <div key={category.name}>
+                      <h5 className="text-sm font-bold text-blue-400 mb-3 tracking-wider uppercase">
+                        {category.name}
+                      </h5>
+                      <ul className="space-y-3">
+                        {category.links.map((link) => (
+                          <li key={link.label} className="relative">
+                            <a
+                              href={link.href}
+                              className="text-gray-400 hover:text-[#3ca2fa] transition-colors"
+                            >
+                              {link.label}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
 
@@ -287,7 +325,7 @@ export default function FooterSection() {
       </div>
 
       {/* Text hover effect */}
-      <div className="lg:flex hidden h-[30rem] -mt-52 -mb-36 relative z-0">
+      <div className="lg:flex hidden h-120 -mt-52 -mb-36 relative z-0">
         <TextHoverEffect text="PRIME" className="z-0" />
       </div>
 

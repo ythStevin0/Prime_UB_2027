@@ -14,84 +14,62 @@ if (typeof window !== "undefined") {
 const events = [
   {
     id: "evt-1",
-    step: "01",
-    title: "Elevate Your Skills",
-    description: "Our exclusive events designed to enhance your expertise in software tools while honing your competitive edge.",
-    borderColor: "border-blue-500/50",
-    textColor: "text-blue-500",
-    tags: ["Excel", "PowerBI", "Software"],
-    cx: 250, cy: 250
+    step: "14 Nov '26 - 27 Mar '27",
+    title: "All Competition",
+    description: "PPC, PetroSmart, BCC, and GCC provide competitive platforms for participants to demonstrate their academic, analytical, and problem-solving capabilities.",
+    borderColor: "border-cyan-500/50",
+    textColor: "text-cyan-500",
+    tags: ["PPC", "PetroSmart", "BCC", "GCC"],
+    cx: 300, cy: 200
   },
   {
     id: "evt-2",
-    step: "02",
-    title: "Future of Energy",
-    description: "A deep dive into sustainable energy transitions led by industry experts. Discover the green energy revolution.",
-    borderColor: "border-cyan-500/50",
-    textColor: "text-cyan-500",
-    tags: ["Seminar", "Energy", "Sustainability"],
-    cx: 750, cy: 450
+    step: "22 Nov '26",
+    title: "Roadshow",
+    description: "Promotional event serving as the first touch point of contact for introducing PRIME 2027 to students from various universities across Indonesia.",
+    borderColor: "border-blue-500/50",
+    textColor: "text-blue-500",
+    tags: ["Promotion", "Interactive", "Recruitment"],
+    cx: 800, cy: 400
   },
   {
     id: "evt-3",
-    step: "03",
-    title: "Connect & Grow",
-    description: "Expand your professional network by meeting peers, mentors, and top executives from leading energy corporations.",
+    step: "21 Mar '27",
+    title: "IPSE",
+    description: "An offline seminar and exhibition designed as a collaborative platform to bridge insights from the energy industry with the development of students’ competencies.",
     borderColor: "border-indigo-500/50",
     textColor: "text-indigo-500",
-    tags: ["Networking", "Mentorship", "Career"],
-    cx: 1250, cy: 250
+    tags: ["Seminar", "Exhibition", "Knowledge-Sharing"],
+    cx: 1300, cy: 600
   },
   {
     id: "evt-4",
-    step: "04",
-    title: "Innovation Challenge",
-    description: "Pitch your most innovative ideas to solve real-world energy problems and win seed funding to kickstart your project.",
+    step: "22 Mar '27",
+    title: "PRIMExplore",
+    description: "An activity designed to provide participants with direct learning experiences in the energy industry. With the theme ‘Energy Industry Immersion’.",
     borderColor: "border-purple-500/50",
     textColor: "text-purple-500",
-    tags: ["Pitching", "Seed Funding", "Competition"],
-    cx: 1550, cy: 600
+    tags: ["Company Visit", "Immersion", "Industry"],
+    cx: 900, cy: 850
   },
   {
     id: "evt-5",
-    step: "05",
-    title: "Hackathon",
-    description: "A 24-hour intense coding and prototyping session to build digital solutions for the energy sector.",
-    borderColor: "border-fuchsia-500/50",
-    textColor: "text-fuchsia-500",
-    tags: ["Coding", "Prototype", "24-Hours"],
-    cx: 1200, cy: 950
-  },
-  {
-    id: "evt-6",
-    step: "06",
-    title: "Mentorship",
-    description: "1-on-1 exclusive sessions with industry veterans guiding your career path and technical journey.",
+    step: "27 Mar '27",
+    title: "Pioneers' Zenith",
+    description: "The grand finale of PRIME 2027, integrating the Awarding Ceremony, Networking Gala Dinner, and Closing Ceremony into a single event.",
     borderColor: "border-pink-500/50",
     textColor: "text-pink-500",
-    tags: ["1-on-1", "Guidance", "Career"],
-    cx: 750, cy: 750
-  },
-  {
-    id: "evt-7",
-    step: "07",
-    title: "Grand Summit",
-    description: "The culmination of Prime UB 2027. Celebrate achievements, hear from keynote speakers, and witness a new era.",
-    borderColor: "border-rose-500/50",
-    textColor: "text-rose-500",
-    tags: ["Keynote", "Celebration", "Awarding"],
-    cx: 250, cy: 950
-  },
+    tags: ["Awarding", "Gala Dinner", "Closing"],
+    cx: 400, cy: 1050
+  }
 ];
 
 // SVG Paths connecting the centers of the events
 const lines = [
-  { id: "line-1", x1: 250, y1: 250, x2: 750, y2: 450 },
-  { id: "line-2", x1: 750, y1: 450, x2: 1250, y2: 250 },
-  { id: "line-3", x1: 1250, y1: 250, x2: 1550, y2: 600 },
-  { id: "line-4", x1: 1550, y1: 600, x2: 1200, y2: 950 },
-  { id: "line-5", x1: 1200, y1: 950, x2: 750, y2: 750 },
-  { id: "line-6", x1: 750, y1: 750, x2: 250, y2: 950 },
+  { id: "line-1", x1: 300, y1: 200, x2: 800, y2: 400 },
+  { id: "line-2", x1: 800, y1: 400, x2: 1300, y2: 600 },
+  { id: "line-3", x1: 1300, y1: 600, x2: 900, y2: 850 },
+  { id: "line-4", x1: 900, y1: 850, x2: 400, y2: 1050 },
 ];
 
 export default function EventsSection() {
@@ -121,7 +99,12 @@ export default function EventsSection() {
     });
 
     // Helper to calculate camera offsets dynamically
-    const getCameraX = (cx: number) => window.innerWidth / 2 - cx;
+    const getCameraX = (cx: number) => {
+      const isMobile = window.innerWidth < 768;
+      // Di desktop: berada di tengah. 
+      // Di mobile: berada di samping (kiri). Karena kartu w-[320px] (center di 160px), offset 180 memberi margin 20px dari kiri.
+      return (isMobile ? 180 : window.innerWidth / 2) - cx;
+    };
     const getCameraY = (cy: number) => window.innerHeight / 2 - cy;
 
     // Initialize camera position (centered on the first event)
@@ -204,11 +187,11 @@ export default function EventsSection() {
         */}
       <div 
         ref={containerRef}
-        className="absolute top-0 left-0 w-[1800px] h-300 z-10"
+        className="absolute top-0 left-0 w-[1800px] h-[1600px] z-10"
       >
         
         {/* SVG Lines Layer */}
-        <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1800 1200">
+        <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1800 1600">
           <defs>
             <linearGradient id="line-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#3b82f6" />
@@ -251,7 +234,7 @@ export default function EventsSection() {
             className={`absolute w-[320px] p-6 rounded-none border ${evt.borderColor} bg-[#0a0a0a]/90 backdrop-blur-md shadow-2xl z-20 hover:border-blue-400 transition-colors duration-300`}
             style={{ left: evt.cx, top: evt.cy }}
           >
-             <div className="flex justify-between items-center mb-4">
+             <div className="flex flex-col xl:flex-row xl:justify-between items-start xl:items-center mb-4 gap-2">
                <h3 className="text-xl font-bold text-white tracking-wide">
                  {evt.title}
                </h3>

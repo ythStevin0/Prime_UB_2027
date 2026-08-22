@@ -72,18 +72,44 @@ export default function Navbar() {
             <button className="flex items-center gap-1 text-sm font-medium text-gray-300 hover:text-white transition-colors py-4">
               Events <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
             </button>
-            <div className="absolute top-full left-1/2 -translate-x-1/2 mt-0 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 bg-[#0a0a0a]/95 backdrop-blur-md border border-white/10 shadow-2xl flex flex-col py-2 rounded-none">
-              {eventsData.map((evt) => (
+            <div className="absolute top-full left-1/2 -translate-x-1/2 mt-0 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 bg-[#0a0a0a]/95 backdrop-blur-md border border-white/10 shadow-2xl flex flex-col py-3 rounded-none">
+              
+              {/* Industry Exposure */}
+              <div className="px-5 py-2 text-xs font-bold text-blue-400 uppercase tracking-wider">
+                Industry Exposure
+              </div>
+              {eventsData.filter(e => e.category === "Industry Exposure").map((evt) => (
                 <Link 
                   key={evt.id} 
                   href={`/events/${evt.slug}`}
-                  className="px-5 py-2.5 text-sm text-gray-400 hover:text-blue-400 hover:bg-white/5 transition-colors border-l-2 border-transparent hover:border-blue-400"
+                  className="px-5 py-2.5 text-sm text-gray-400 hover:text-blue-400 hover:bg-white/5 transition-colors border-l-2 border-transparent hover:border-blue-400 flex flex-col"
                 >
-                  {evt.title} {evt.titleHighlight}
+                  <span>{evt.title}</span>
+                  {evt.titleHighlight && <span className="text-xs text-gray-500">{evt.titleHighlight}</span>}
                 </Link>
               ))}
+
+              <div className="my-2 border-t border-white/10" />
+
+              {/* Networking & Engagement */}
+              <div className="px-5 py-2 text-xs font-bold text-blue-400 uppercase tracking-wider">
+                Networking & Engagement
+              </div>
+              {eventsData.filter(e => e.category === "Networking & Engagement").map((evt) => (
+                <Link 
+                  key={evt.id} 
+                  href={`/events/${evt.slug}`}
+                  className="px-5 py-2.5 text-sm text-gray-400 hover:text-blue-400 hover:bg-white/5 transition-colors border-l-2 border-transparent hover:border-blue-400 flex flex-col"
+                >
+                  <span>{evt.title}</span>
+                  {evt.titleHighlight && <span className="text-xs text-gray-500">{evt.titleHighlight}</span>}
+                </Link>
+              ))}
+
             </div>
           </div>
+          
+          <Link href="/#events" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Timeline</Link>
         </div>
 
         {/* CTA Button */}
@@ -108,8 +134,24 @@ export default function Navbar() {
             items={[
               { label: 'Home', ariaLabel: 'Home', link: '/' },
               { label: 'About', ariaLabel: 'About', link: '/#about-competitions' },
-              { label: 'Competitions', ariaLabel: 'Competitions', link: '/#about-competitions' },
-              { label: 'Events', ariaLabel: 'Events', link: '/#main-events' }
+              { 
+                label: 'Competitions', 
+                ariaLabel: 'Competitions', 
+                link: '#',
+                subItems: competitionsData.map(c => ({ label: c.title, link: `/competitions/${c.slug}` }))
+              },
+              { 
+                label: 'Events', 
+                ariaLabel: 'Events', 
+                link: '#',
+                subItems: [
+                  { label: 'Industry Exposure', link: '#', isHeader: true },
+                  ...eventsData.filter(e => e.category === "Industry Exposure").map(e => ({ label: `${e.title} ${e.titleHighlight}`, link: `/events/${e.slug}` })),
+                  { label: 'Networking & Engagement', link: '#', isHeader: true },
+                  ...eventsData.filter(e => e.category === "Networking & Engagement").map(e => ({ label: `${e.title} ${e.titleHighlight}`, link: `/events/${e.slug}` }))
+                ]
+              },
+              { label: 'Timeline', ariaLabel: 'Timeline', link: '/#events' }
             ]}
             socialItems={[
               { label: 'Instagram', link: 'https://instagram.com/primeub' },

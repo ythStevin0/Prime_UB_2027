@@ -120,7 +120,7 @@ export default function SplashScreen({ onFinish }: { onFinish: () => void }) {
                           fontSize: isMerged 
                               ? "clamp(4.5rem, 14vw, 9.5rem)" 
                               : "clamp(1.5rem, 4vw, 3rem)",
-                          letterSpacing: isMerged ? "0.02em" : "normal",
+                          letterSpacing: isMerged ? "0.02em" : "0em",
                         }}
                         exit={{ 
                           opacity: 0, 
