@@ -155,12 +155,10 @@ export default function FooterSection() {
     {
       title: "Competitions",
       links: [
+        { label: "Paper and Poster", href: "/competitions/paper-and-poster" },
+        { label: "PetroSmart", href: "/competitions/petrosmart" },
         { label: "Business Case", href: "/competitions/business-case" },
-        { label: "Geothermal", href: "/competitions/geothermal" },
-        { label: "Smart Innovation", href: "/competitions/smart-innovation" },
-        { label: "Oil Rig Design", href: "/competitions/oil-rig-design" },
-        { label: "Paper & Poster", href: "/competitions/paper-and-poster" },
-        { label: "Mud Design", href: "/competitions/mud-design" },
+        { label: "Geothermal Case", href: "/competitions/geothermal-case" },
       ],
     },
     {
@@ -169,15 +167,15 @@ export default function FooterSection() {
         {
           name: "Industry Exposure",
           links: [
-            { label: "Pre-Event Workshop", href: "/events/pre-event-workshop" },
-            { label: "Grand Exhibition", href: "/events/grand-exhibition" },
+            { label: "PRIMExplore", href: "/events/primexplore" },
+            { label: "IPSE", href: "/events/ipse" },
           ],
         },
         {
           name: "Networking & Engagement",
           links: [
-            { label: "Main Event Talkshow", href: "/events/main-event-talkshow" },
-            { label: "Awarding Night", href: "/events/awarding-night" },
+            { label: "Roadshow", href: "/events/roadshow" },
+            { label: "Pioneers' Zenith", href: "/events/pioneers-zenith" },
           ],
         },
       ],
