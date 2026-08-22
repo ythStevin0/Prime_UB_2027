@@ -43,11 +43,11 @@ export default function OrganizedBySection({ items }: OrganizedBySectionProps) {
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
         >
-          <div className="h-[1px] flex-1 max-w-[120px] md:max-w-[200px] bg-gray-800" />
+          <div className="h-px flex-1 max-w-30 md:max-w-50 bg-gray-800" />
           <h2 className="text-sm md:text-base font-bold tracking-[0.25em] uppercase text-[#3b82f6]">
             ORGANIZED BY
           </h2>
-          <div className="h-[1px] flex-1 max-w-[120px] md:max-w-[200px] bg-gray-800" />
+          <div className="h-px flex-1 max-w-30 md:max-w-50 bg-gray-800" />
         </motion.div>
 
         {/* Card Container */}
@@ -61,7 +61,7 @@ export default function OrganizedBySection({ items }: OrganizedBySectionProps) {
           <div className="flex flex-col md:flex-row justify-center items-center gap-16 md:gap-32">
             {items.map((item) => (
               <div key={item.name} className="flex flex-col items-center gap-5">
-                <div className="w-[84px] h-[84px] rounded-full bg-[#161c28] border border-white/5 flex items-center justify-center shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+                <div className="w-21 h-21 rounded-full bg-[#161c28] border border-white/5 flex items-center justify-center shadow-[0_0_15px_rgba(0,0,0,0.5)]">
                   <span className="text-2xl font-bold text-[#67baf4]">
                     {item.name.charAt(0)}
                   </span>

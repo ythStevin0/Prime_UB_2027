@@ -56,8 +56,8 @@ export default function MainEventsSection() {
                     {evt.title} <span className={evt.theme.text}>{evt.titleHighlight}</span>
                   </h3>
                   
-                  <p className="text-gray-300 text-base md:text-lg leading-relaxed mb-10">
-                    {evt.shortDesc}
+                  <p className="text-gray-300 text-base md:text-lg leading-relaxed mb-8 line-clamp-4">
+                    {evt.longDesc}
                   </p>
                   
                   <Link href={`/events/${evt.slug}`} className={`${evt.theme.bgBtn} text-white font-semibold py-3 px-8 rounded-none transition-all hover:pl-10 flex items-center gap-2 w-max border border-transparent hover:border-white/20 shadow-[0_0_15px_rgba(0,0,0,0.5)]`}>
