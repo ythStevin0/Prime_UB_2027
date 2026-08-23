@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Target, Zap } from "lucide-react";
+import { Target, Zap } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { competitionsData } from "../../data/competitions";
 
@@ -59,17 +60,29 @@ export default function AboutCompetitionsSection() {
                 whileInView="visible"
                 viewport={{ once: true, margin: "-50px" }}
                 custom={i + 1}
-                className="group h-full p-5 border border-white/5 bg-white/5 rounded-none hover:bg-white/10 hover:border-blue-500/30 transition-all duration-300 cursor-pointer"
+                className="group h-full flex flex-col border border-white/5 bg-white/5 rounded-none hover:bg-white/10 hover:border-blue-500/30 transition-all duration-300 cursor-pointer overflow-hidden"
               >
-                <p className="text-[10px] font-bold uppercase tracking-wider text-blue-400 mb-2">
-                  {comp.label}
-                </p>
-                <h3 className="text-lg font-bold text-white mb-1 group-hover:text-blue-200 transition-colors">
-                  {comp.title}
-                </h3>
-                <p className="text-xs text-gray-400 line-clamp-2">
-                  {comp.shortDesc}
-                </p>
+                {comp.image && (
+                  <div className="w-full h-40 relative overflow-hidden bg-black/20">
+                    <Image 
+                      src={comp.image} 
+                      alt={comp.title}
+                      fill
+                      className="object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                )}
+                <div className="p-5 flex flex-col grow">
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-blue-400 mb-2">
+                    {comp.label}
+                  </p>
+                  <h3 className="text-lg font-bold text-white mb-1 group-hover:text-blue-200 transition-colors">
+                    {comp.title}
+                  </h3>
+                  <p className="text-xs text-gray-400 line-clamp-2">
+                    {comp.shortDesc}
+                  </p>
+                </div>
               </motion.div>
               </Link>
             ))}
@@ -96,7 +109,7 @@ export default function AboutCompetitionsSection() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="relative w-full min-h-150 border border-white/10 bg-[#0a0a0a] rounded-none overflow-hidden group flex flex-col mt-8 lg:mt-0"
+          className="relative w-full h-fit lg:self-start border border-white/10 bg-[#0a0a0a] rounded-none overflow-hidden group flex flex-col mt-8 lg:mt-0"
         >
           {/* Glassmorphism Abstract Background (Sebagai ganti gambar daun) */}
           <div className="absolute inset-0 z-0 pointer-events-none">
@@ -110,7 +123,7 @@ export default function AboutCompetitionsSection() {
           <div className="absolute top-6 right-6 w-8 h-8 border-t-2 border-r-2 border-blue-500/50 z-20 pointer-events-none" />
 
           {/* Konten About */}
-          <div className="relative z-10 p-8 md:p-12 flex flex-col h-full">
+          <div className="relative z-10 p-8 md:p-12 pb-24 md:pb-24 flex flex-col h-full">
             
             <div className="mb-auto">
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-500 mb-4">
@@ -149,13 +162,6 @@ export default function AboutCompetitionsSection() {
                   Generate scientifically grounded, actionable ideas for the energy transition.
                 </p>
               </div>
-            </div>
-
-            {/* Tombol dekoratif di pojok kanan bawah */}
-            <div className="absolute bottom-0 right-0">
-               <div className="bg-[#050505] border-t border-l border-white/10 px-6 py-3 text-sm font-bold text-blue-400 flex items-center gap-2 hover:bg-white/5 transition-colors cursor-pointer">
-                 Learn More <ArrowRight className="w-4 h-4" />
-               </div>
             </div>
 
           </div>

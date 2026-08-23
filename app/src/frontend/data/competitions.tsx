@@ -15,6 +15,7 @@ export type CompetitionData = {
   subtitle: string;
   shortDesc: string;
   longDesc: string;
+  image?: string;
   icon: React.ReactNode;
   timeline: TimelineEvent[];
   mapEmbedUrl: string;
@@ -81,6 +82,7 @@ export const competitionsData: CompetitionData[] = [
     shortDesc: "Present data-driven scientific papers and innovative concepts.",
     longDesc: "A scientific competition where students present data-driven papers contributing to the energy sector, assessed on research quality, critical thinking, and communicative presentation.",
     icon: <FileText className="w-16 h-16 md:w-24 md:h-24 text-pink-400" />,
+    image: "/paper_and_poster.png",
     timeline: timelinePPC,
     mapEmbedUrl: defaultMapEmbedUrl,
   },
@@ -93,6 +95,7 @@ export const competitionsData: CompetitionData[] = [
     shortDesc: "Test understanding and critical thinking in the energy sector.",
     longDesc: "A fast-paced knowledge competition testing participants' critical thinking and understanding of oil and gas, geothermal, renewable energy, and current energy policies.",
     icon: <Droplets className="w-16 h-16 md:w-24 md:h-24 text-blue-400" />,
+    image: "/petrosmart.png",
     timeline: timelinePetrosmart,
     mapEmbedUrl: defaultMapEmbedUrl,
   },
@@ -105,6 +108,7 @@ export const competitionsData: CompetitionData[] = [
     shortDesc: "Analyze and devise strategic business solutions.",
     longDesc: "A strategic competition to comprehensively analyze real-world business problems and formulate innovative, actionable solutions using data-driven decision-making.",
     icon: <Briefcase className="w-16 h-16 md:w-24 md:h-24 text-purple-400" />,
+    image: "/business_case.png",
     timeline: timelineBCC,
     mapEmbedUrl: defaultMapEmbedUrl,
   },
@@ -117,6 +121,7 @@ export const competitionsData: CompetitionData[] = [
     shortDesc: "Formulate innovative geothermal development solutions.",
     longDesc: "A strategic competition to analyze geothermal industry challenges and formulate innovative solutions, balancing technical, economic, and sustainability factors.",
     icon: <Globe className="w-16 h-16 md:w-24 md:h-24 text-cyan-400" />,
+    image: "/geothermal.png",
     timeline: timelineGCC,
     mapEmbedUrl: defaultMapEmbedUrl,
   },
