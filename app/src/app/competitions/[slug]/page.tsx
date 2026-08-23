@@ -41,9 +41,15 @@ export default async function CompetitionDetailPage({ params }: { params: Promis
         {/* Main Content */}
         <div className="relative z-10 flex flex-col items-center">
           {/* Large Icon / Illustration */}
-          <div className="mb-8 p-6 glass rounded-none border border-white/10 shadow-[0_0_40px_rgba(34,211,238,0.2)]">
-            {comp.icon}
-          </div>
+          {comp.image ? (
+            <div className="mb-8 w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 relative flex items-center justify-center">
+              <img src={comp.image} alt={comp.title} className="w-full h-full object-contain" />
+            </div>
+          ) : (
+            <div className="mb-8 p-6 glass rounded-none border border-white/10 shadow-[0_0_40px_rgba(34,211,238,0.2)]">
+              {comp.icon}
+            </div>
+          )}
 
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
             {comp.title}

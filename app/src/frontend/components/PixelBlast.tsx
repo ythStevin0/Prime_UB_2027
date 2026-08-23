@@ -384,7 +384,6 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
     scene: THREE.Scene;
     camera: THREE.OrthographicCamera;
     material: THREE.ShaderMaterial;
-    clock: THREE.Clock;
     clickIx: number;
     uniforms: {
       uResolution: { value: THREE.Vector2 };
@@ -487,7 +486,7 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
       const quadGeom = new THREE.PlaneGeometry(2, 2);
       const quad = new THREE.Mesh(quadGeom, material);
       scene.add(quad);
-      let startTime = performance.now();
+      const startTime = performance.now();
       const setSize = () => {
         const w = container.clientWidth || 1;
         const h = container.clientHeight || 1;
