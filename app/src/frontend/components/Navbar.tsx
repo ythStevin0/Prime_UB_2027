@@ -110,6 +110,7 @@ export default function Navbar() {
           </div>
           
           <Link href="/#events" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Timeline</Link>
+          <Link href="/merchandise" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Merchandise</Link>
         </div>
 
         {/* CTA Button */}
@@ -151,7 +152,8 @@ export default function Navbar() {
                   ...eventsData.filter(e => e.category === "Networking & Engagement").map(e => ({ label: `${e.title} ${e.titleHighlight}`, link: `/events/${e.slug}` }))
                 ]
               },
-              { label: 'Timeline', ariaLabel: 'Timeline', link: '/#events' }
+              { label: 'Timeline', ariaLabel: 'Timeline', link: '/#events' },
+              { label: 'Merchandise', ariaLabel: 'Merchandise', link: '/merchandise' }
             ]}
             socialItems={[
               { label: 'Instagram', link: 'https://instagram.com/primeub' },
