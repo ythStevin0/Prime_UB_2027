@@ -17,7 +17,7 @@ export const merchandiseData: MerchandiseItem[] = [
     name: "PRIME UB 2027 Hoodie",
     category: "Apparel",
     price: 250000,
-    image: "/PRIME_logo.png",
+    image: "/madas.png",
     description:
       "Premium heavyweight hoodie dengan bordir PRIME UB 2027. Bahan fleece cotton 360gsm, nyaman dan hangat untuk aktivitas kampus.",
     sizes: ["S", "M", "L", "XL", "XXL"],
@@ -29,7 +29,7 @@ export const merchandiseData: MerchandiseItem[] = [
     name: "PRIME Essential Tee",
     category: "Apparel",
     price: 120000,
-    image: "/PRIME_logo.png",
+    image: "/madas.png",
     description:
       "Kaos premium 30s combed cotton dengan desain minimalis PRIME. Nyaman untuk sehari-hari.",
     sizes: ["S", "M", "L", "XL", "XXL"],
@@ -40,7 +40,7 @@ export const merchandiseData: MerchandiseItem[] = [
     name: "PRIME UB Tote Bag",
     category: "Accessories",
     price: 75000,
-    image: "/PRIME_logo.png",
+    image: "/madas.png",
     description:
       "Tote bag kanvas premium dengan print PRIME UB. Kapasitas besar, cocok untuk bawa buku dan laptop.",
   },
@@ -50,7 +50,7 @@ export const merchandiseData: MerchandiseItem[] = [
     name: "PRIME Snapback Cap",
     category: "Accessories",
     price: 95000,
-    image: "/PRIME_logo.png",
+    image: "/madas.png",
     description:
       "Topi snapback dengan bordir PRIME di bagian depan. Adjustable strap, one size fits all.",
   },

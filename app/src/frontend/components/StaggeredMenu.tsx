@@ -2,6 +2,8 @@
 
 import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
+import Link from 'next/link';
+import Image from 'next/image';
 
 export interface StaggeredMenuItem {
   label: string;
@@ -22,6 +24,8 @@ export interface StaggeredMenuProps {
   displayItemNumbering?: boolean;
   className?: string;
   logoUrl?: string;
+  brandLogoSrc?: string;
+  brandName?: React.ReactNode;
   menuButtonColor?: string;
   openMenuButtonColor?: string;
   accentColor?: string;
@@ -45,6 +49,8 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   changeMenuColorOnOpen = true,
   accentColor = '#5227FF',
   isFixed = false,
+  brandLogoSrc,
+  brandName,
   closeOnClickAway = true,
   onMenuOpen,
   onMenuClose
@@ -469,6 +475,27 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
           style={{ WebkitBackdropFilter: 'blur(12px)' }}
           aria-hidden={!open}
         >
+          {/* Brand Logo Header — same row as close button */}
+          {brandLogoSrc && (
+            <Link
+              href="/"
+              className="absolute top-7 left-6 flex items-center gap-2.5 z-20"
+              onClick={() => { toggleMenu(); }}
+            >
+              <Image
+                src={brandLogoSrc}
+                alt={typeof brandName === 'string' ? brandName : 'Brand Logo'}
+                width={32}
+                height={32}
+                className="rounded-full object-contain"
+              />
+              {brandName && (
+                <span className="font-bold text-base tracking-wider text-white">
+                  {brandName}
+                </span>
+              )}
+            </Link>
+          )}
           <div className="sm-panel-inner flex-1 flex flex-col gap-5">
             <ul
               className="sm-panel-list list-none m-0 p-0 flex flex-col gap-2"
