@@ -28,7 +28,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
         
         {/* Brand / Logo */}
-        <div className="flex items-center gap-3 cursor-pointer">
+        <Link href="/" className="flex items-center gap-3">
           <Image
             src="/PRIME_logo.png"
             alt="PRIME UB Logo"
@@ -40,13 +40,12 @@ export default function Navbar() {
             }}
           />
           <span className="font-bold text-lg tracking-wider text-white">
-            PRIME<span className="text-blue-400">UB</span>
+            PRIME <span className="text-blue-400">2027</span>
           </span>
-        </div>
+        </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex flex-1 items-center justify-center gap-6 lg:gap-8">
-          <Link href="/" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Home</Link>
           <Link href="/#about-competitions" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">About</Link>
           
           {/* Competitions Dropdown */}
@@ -132,8 +131,9 @@ export default function Navbar() {
           <StaggeredMenu
             isFixed={true}
             position="right"
+            brandLogoSrc="/PRIME_logo.png"
+            brandName={<>PRIME <span className="text-blue-400">2027</span></>}
             items={[
-              { label: 'Home', ariaLabel: 'Home', link: '/' },
               { label: 'About', ariaLabel: 'About', link: '/#about-competitions' },
               { 
                 label: 'Competitions', 

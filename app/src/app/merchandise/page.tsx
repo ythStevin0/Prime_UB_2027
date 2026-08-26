@@ -69,9 +69,9 @@ export default function MerchandisePage() {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-16 px-6">
         {/* Background glow */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-blue-600/8 rounded-full blur-[120px]" />
-          <div className="absolute top-1/3 left-1/4 w-[300px] h-[300px] bg-cyan-500/5 rounded-full blur-[80px]" />
-          <div className="absolute bottom-1/3 right-1/4 w-[300px] h-[300px] bg-blue-500/5 rounded-full blur-[80px]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-150 bg-blue-600/8 rounded-full blur-[120px]" />
+          <div className="absolute top-1/3 left-1/4 w-75 h-75 bg-cyan-500/5 rounded-full blur-[80px]" />
+          <div className="absolute bottom-1/3 right-1/4 w-75 h-75 bg-blue-500/5 rounded-full blur-[80px]" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto w-full">
@@ -81,7 +81,7 @@ export default function MerchandisePage() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, ease: "easeOut" }}
-              className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-black tracking-tighter leading-none text-white/[0.04] whitespace-nowrap"
+              className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-black tracking-tighter leading-none text-white/4 whitespace-nowrap"
             >
               PRIME
             </motion.h1>
@@ -164,7 +164,7 @@ export default function MerchandisePage() {
               <motion.div
                 animate={{ y: [0, -16, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" as const }}
-                className="relative w-72 h-72 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem]"
+                className="relative w-72 h-72 md:w-96 md:h-96 lg:w-md lg:h-112"
               >
                 {/* Glow behind hero product */}
                 <div className="absolute inset-0 bg-blue-500/10 rounded-full blur-[60px] scale-75" />
