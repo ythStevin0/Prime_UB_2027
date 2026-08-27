@@ -102,10 +102,15 @@ export default function EventsSection() {
     const getCameraX = (cx: number) => {
       const isMobile = window.innerWidth < 768;
       // Di desktop: berada di tengah. 
-      // Di mobile: berada di samping (kiri). Karena kartu w-[320px] (center di 160px), offset 180 memberi margin 20px dari kiri.
-      return (isMobile ? 180 : window.innerWidth / 2) - cx;
+      // Di mobile: berada di samping (kiri). Tambahkan margin yang cukup agar border tidak terpotong.
+      return (isMobile ? 190 : window.innerWidth / 2) - cx;
     };
-    const getCameraY = (cy: number) => window.innerHeight / 2 - cy;
+    const getCameraY = (cy: number) => {
+      const isMobile = window.innerWidth < 768;
+      // Di mobile, posisikan kotak di 250px dari atas agar tidak terpotong (karena tinggi kotak ~250px, 
+      // jika diset 100 maka bagian atas kotak akan terpotong / minus).
+      return (isMobile ? 250 : window.innerHeight / 2) - cy;
+    };
 
     // Initialize camera position (centered on the first event)
     gsap.set(containerRef.current, {
