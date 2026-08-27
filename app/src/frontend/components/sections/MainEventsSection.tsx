@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { eventsData } from "@/frontend/data/events";
 
 export default function MainEventsSection() {
@@ -33,10 +34,12 @@ export default function MainEventsSection() {
               <div className={`absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 ${evt.theme.corner} z-20 pointer-events-none transition-all duration-500 group-hover:w-12 group-hover:h-12`} />
               {/* Image Side */}
               <div className="w-full lg:w-1/2 relative min-h-75 lg:min-h-112.5">
-                <img 
+                <Image 
                   src={evt.image} 
                   alt={evt.title + " " + evt.titleHighlight} 
-                  className="absolute inset-0 w-full h-full object-cover"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
                 />
               </div>
 
