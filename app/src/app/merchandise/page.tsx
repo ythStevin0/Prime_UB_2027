@@ -27,6 +27,7 @@ export default function MerchandisePage() {
   const sideItems = merchandiseData.filter((m) => m.id !== featuredItem.id);
 
   const addToCart = (item: (typeof merchandiseData)[0]) => {
+    /* Temporarily disabled for "Coming Soon"
     const size = item.sizes ? selectedSizes[item.id] || item.sizes[0] : undefined;
     setCart((prev) => {
       const existing = prev.find((c) => c.id === item.id && c.size === size);
@@ -40,6 +41,7 @@ export default function MerchandisePage() {
         { id: item.id, name: item.name, price: item.price, size, quantity: 1, image: item.image },
       ];
     });
+    */
     setAddedFeedback(item.id);
     setTimeout(() => setAddedFeedback(null), 1200);
   };
@@ -144,9 +146,9 @@ export default function MerchandisePage() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
-                        className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs font-bold text-emerald-400"
+                        className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs font-bold text-amber-400 whitespace-nowrap"
                       >
-                        ✓ Added
+                        Coming Soon!
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -218,7 +220,7 @@ export default function MerchandisePage() {
                   }}
                 >
                   <ShoppingBag className="w-4 h-4" />
-                  {addedFeedback === featuredItem.id ? "✓ Ditambahkan!" : "Tambah ke Keranjang"}
+                  {addedFeedback === featuredItem.id ? "Coming Soon!" : "Tambah ke Keranjang"}
                 </button>
               </div>
             </motion.div>
@@ -264,9 +266,9 @@ export default function MerchandisePage() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
-                        className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs font-bold text-emerald-400"
+                        className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs font-bold text-amber-400 whitespace-nowrap"
                       >
-                        ✓ Added
+                        Coming Soon!
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -407,11 +409,11 @@ export default function MerchandisePage() {
                   onClick={() => addToCart(item)}
                   className={`mt-4 px-5 py-2 text-xs font-bold uppercase tracking-wider border transition-all duration-300 ${
                     addedFeedback === item.id
-                      ? "border-emerald-500 bg-emerald-500/20 text-emerald-400"
+                      ? "border-amber-500 bg-amber-500/20 text-amber-400"
                       : "border-white/10 text-gray-400 hover:border-blue-500/50 hover:text-blue-400"
                   }`}
                 >
-                  {addedFeedback === item.id ? "✓ Added" : "Add to Cart"}
+                  {addedFeedback === item.id ? "Coming Soon" : "Add to Cart"}
                 </button>
               </motion.div>
             ))}

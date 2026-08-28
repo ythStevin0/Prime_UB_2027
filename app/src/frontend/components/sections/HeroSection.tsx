@@ -11,11 +11,6 @@ import PixelBlast from "@frontend/components/PixelBlast";
  * Referensi: Layout Brand Designer (teks bawah split left-right).
  */
 
-const fadeIn: Variants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 1, ease: "easeOut" } },
-};
-
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
   visible: (i: number) => ({
@@ -26,6 +21,7 @@ const fadeUp: Variants = {
 };
 
 export default function HeroSection() {
+
   return (
     <section className="relative h-screen max-h-screen flex flex-col overflow-hidden">
       {/* ======= PIXEL BLAST BACKGROUND ======= */}
@@ -88,7 +84,7 @@ export default function HeroSection() {
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
             {/* ---- LEFT: Title ---- */}
-            <div>
+            <div className="flex flex-col text-center md:text-left items-center md:items-start">
               {/* Badge */}
               <motion.div
                 className="flex items-center gap-3 mb-4"
@@ -124,29 +120,31 @@ export default function HeroSection() {
             </div>
 
             {/* ---- RIGHT: Description + CTA ---- */}
-            <div className="flex flex-col gap-4 md:max-w-sm md:ml-auto">
+            <div className="flex flex-col gap-6 md:max-w-sm md:ml-auto text-center md:text-right items-center md:items-end md:mt-6">
               {/* Bold statement */}
               <motion.p
                 className="text-lg md:text-xl font-bold text-white leading-snug"
+                style={{ textShadow: "0 2px 15px rgba(0,0,0,1), 0 0 5px rgba(0,0,0,0.8)" }}
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
                 custom={2}
               >
-                Inovasi riset dan keahlian industri untuk solusi energi masa depan.
+                Inovasi riset dan keahlian industri untuk <span className="text-orange-400">solusi</span> <span className="text-purple-400">energi</span> <span className="text-rose-400">masa depan.</span>
               </motion.p>
 
               {/* Description */}
               <motion.p
-                className="text-sm md:text-base leading-[1.7] text-gray-200 drop-shadow-md"
+                className="text-sm md:text-base leading-[1.7] text-gray-300"
+                style={{ textShadow: "0 2px 10px rgba(0,0,0,1), 0 0 4px rgba(0,0,0,0.8)" }}
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
                 custom={3}
               >
-                PRIME UB 2027 sebagai wadah transformatif di mana inovasi riset, wawasan akademis, dan keahlian industri berpadu untuk membentuk solusi energi masa depan melalui kompetisi nasional.
+                <span className="font-semibold text-white">PRIME UB 2027</span> sebagai wadah transformatif di mana <span className="text-orange-400">inovasi riset</span>, <span className="text-purple-400">wawasan akademis</span>, dan <span className="text-rose-400">keahlian industri</span> berpadu untuk membentuk solusi energi masa depan melalui kompetisi nasional.
               </motion.p>
 
               {/* CTA */}
@@ -157,19 +155,29 @@ export default function HeroSection() {
                 viewport={{ once: true }}
                 custom={4}
               >
-                <button
-                  className="flex items-center justify-center gap-2 px-6 py-3 rounded-none text-sm font-semibold transition-all duration-300 hover:bg-white/5 active:scale-95 cursor-pointer border border-[#333] text-white hover:border-gray-400"
-                >
-                  <Download className="w-4 h-4" />
-                  Download Invitation
-                </button>
+                <div className="relative group p-0.5 overflow-hidden rounded-none shadow-[0_0_15px_rgba(255,255,255,0.05)] hover:shadow-[0_0_30px_rgba(168,85,247,0.3)] transition-all duration-500">
+                  {/* Default static border */}
+                  <div className="absolute inset-0 bg-white/20 group-hover:opacity-0 transition-opacity duration-300" />
+                  
+                  {/* Rotating animated border on hover */}
+                  <div className="absolute -inset-full opacity-0 group-hover:opacity-100 group-hover:animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#00000000_50%,#f97316_70%,#a855f7_85%,#e11d48_100%)] transition-opacity duration-300" />
+                  
+                  {/* Inner button (covers the center, leaving only the border visible) */}
+                  <a
+                    href="/invitation.pdf"
+                    className="relative flex items-center justify-center gap-2.5 px-6 py-3 bg-black text-white cursor-pointer active:scale-95 transition-transform duration-300 w-full h-full"
+                  >
+                    <Download className="w-4 h-4 transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-110 drop-shadow-md text-gray-300 group-hover:text-white" />
+                    <span className="tracking-[0.15em] uppercase drop-shadow-md font-bold text-xs">Download Invitation</span>
+                  </a>
+                </div>
               </motion.div>
             </div>
           </div>
 
           {/* ---- ORGANIZED BY (Below split content) ---- */}
           <motion.div
-            className="flex justify-center gap-8 md:gap-20 items-center mt-6 md:mt-8 pt-4 border-t border-white/5"
+            className="flex justify-center gap-8 md:gap-16 items-center mt-10 md:mt-12 pt-6 border-t border-white/5"
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
@@ -177,20 +185,23 @@ export default function HeroSection() {
             custom={5}
           >
             {[
-              { name: "Teknik Perminyakan UB", id: "T" },
-              { name: "HMTM FT UB", id: "H" },
-              { name: "BEM FT UB", id: "B" },
+              { name: "Universitas Brawijaya", src: "/logo_ub.png" },
+              { name: "SPE UB SC", src: "/LOGO_SPE_UB_SC.png" },
             ].map((item) => (
               <div
                 key={item.name}
-                className="flex items-center gap-3 opacity-50 hover:opacity-100 transition-opacity duration-300"
+                className="flex items-center gap-3 group cursor-pointer"
               >
-                <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-[#161c28] border border-white/10 flex items-center justify-center">
-                  <span className="text-xs md:text-sm font-bold text-blue-400">
-                    {item.id}
-                  </span>
+                <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center transition-all duration-500 group-hover:scale-110 relative">
+                  <div className="absolute inset-0 bg-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md rounded-full" />
+                  <Image 
+                    src={item.src} 
+                    alt={item.name} 
+                    fill 
+                    className="object-contain drop-shadow-[0_0_5px_rgba(255,255,255,0.1)] transition-transform duration-300 relative z-10" 
+                  />
                 </div>
-                <span className="text-xs md:text-sm font-medium text-gray-400 hidden sm:inline">
+                <span className="text-xs md:text-sm font-medium text-gray-500 hidden sm:inline transition-all duration-300 group-hover:text-gray-200 group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]">
                   {item.name}
                 </span>
               </div>
