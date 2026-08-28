@@ -112,17 +112,31 @@ export default function Navbar() {
           <Link href="/merchandise" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Merchandise</Link>
         </div>
 
-        {/* CTA Button */}
-        <div className="hidden md:flex">
+        {/* CTA Buttons */}
+        <div className="hidden md:flex gap-4">
+          {/* 1. Submit Karya - Cyberpunk Outline Style */}
+          <Link
+            href="/submit"
+            className="relative px-6 py-2.5 rounded-none font-semibold text-sm text-cyan-400 border border-cyan-500/50 hover:border-cyan-300 transition-all duration-300 flex items-center justify-center overflow-hidden group hover:shadow-[0_0_15px_rgba(34,211,238,0.4)]"
+          >
+            {/* Slide up fill */}
+            <div className="absolute inset-0 bg-cyan-400/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+            <div className="absolute inset-0 bg-cyan-400/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out delay-75" />
+            <span className="relative z-10 group-hover:text-cyan-100 transition-colors duration-300 tracking-wide">Submit Karya</span>
+          </Link>
+
+          {/* 2. Daftar Sekarang - Dynamic Gradient Style */}
           <Link
             href="/register"
-            className="px-5 py-2.5 rounded-none font-semibold text-sm text-white transition-all duration-300 hover:scale-105"
+            className="relative px-6 py-2.5 rounded-none font-semibold text-sm text-white transition-all duration-300 hover:scale-[1.03] flex items-center justify-center overflow-hidden group border border-white/10 hover:shadow-[0_0_20px_rgba(103,186,244,0.6)]"
             style={{
-              background: "var(--gradient-brand-vivid)",
-              boxShadow: "var(--shadow-glow-blue)",
+              background: "linear-gradient(90deg, #1e466b, #67baf4)",
             }}
           >
-            Daftar Sekarang
+            {/* Shimmer sweep */}
+            <div className="absolute top-0 left-[-150%] w-[150%] h-full bg-linear-to-r from-transparent via-white/40 to-transparent skew-x-[-25deg] group-hover:left-[150%] transition-all duration-700 ease-in-out" />
+            
+            <span className="relative z-10 drop-shadow-md tracking-wide">Daftar Sekarang</span>
           </Link>
         </div>
 
@@ -153,7 +167,9 @@ export default function Navbar() {
                 ]
               },
               { label: 'Timeline', ariaLabel: 'Timeline', link: '/#events' },
-              { label: 'Merchandise', ariaLabel: 'Merchandise', link: '/merchandise' }
+              { label: 'Merchandise', ariaLabel: 'Merchandise', link: '/merchandise' },
+              { label: 'Submit Karya', ariaLabel: 'Submit Karya', link: '/submit' },
+              { label: 'Daftar Sekarang', ariaLabel: 'Daftar Sekarang', link: '/register' }
             ]}
             socialItems={[
               { label: 'Instagram', link: 'https://instagram.com/primeub' },
