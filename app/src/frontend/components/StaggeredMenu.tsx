@@ -15,11 +15,17 @@ export interface StaggeredMenuSocialItem {
   label: string;
   link: string;
 }
+export interface StaggeredMenuActionButton {
+  label: string;
+  link: string;
+  primary?: boolean;
+}
 export interface StaggeredMenuProps {
   position?: 'left' | 'right';
   colors?: string[];
   items?: StaggeredMenuItem[];
   socialItems?: StaggeredMenuSocialItem[];
+  actionButtons?: StaggeredMenuActionButton[];
   displaySocials?: boolean;
   displayItemNumbering?: boolean;
   className?: string;
@@ -41,6 +47,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   colors = ['#B497CF', '#5227FF'],
   items = [],
   socialItems = [],
+  actionButtons = [],
   displaySocials = true,
   displayItemNumbering = true,
   className,
@@ -135,6 +142,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     ) as HTMLElement[];
     const socialTitle = panel.querySelector('.sm-socials-title') as HTMLElement | null;
     const socialLinks = Array.from(panel.querySelectorAll('.sm-socials-link')) as HTMLElement[];
+    const actionBtns = Array.from(panel.querySelectorAll('.sm-action-btn')) as HTMLElement[];
 
     const offscreen = position === 'left' ? -100 : 100;
     const layerStates = layers.map(el => ({ el, start: offscreen }));
@@ -144,6 +152,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     if (numberEls.length) gsap.set(numberEls, { '--sm-num-opacity': 0 });
     if (socialTitle) gsap.set(socialTitle, { opacity: 0 });
     if (socialLinks.length) gsap.set(socialLinks, { y: 25, opacity: 0 });
+    if (actionBtns.length) gsap.set(actionBtns, { y: 25, opacity: 0 });
 
     const tl = gsap.timeline({ paused: true });
 
@@ -203,6 +212,24 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       }
     }
 
+    if (actionBtns.length) {
+      const actionsStart = panelInsertTime + panelDuration * 0.35;
+      tl.to(
+        actionBtns,
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.5,
+          ease: 'power3.out',
+          stagger: 0.1,
+          onComplete: () => {
+            gsap.set(actionBtns, { clearProps: 'opacity' });
+          }
+        },
+        actionsStart
+      );
+    }
+
     openTlRef.current = tl;
     return tl;
   }, [position]);
@@ -251,8 +278,10 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 
         const socialTitle = panel.querySelector('.sm-socials-title') as HTMLElement | null;
         const socialLinks = Array.from(panel.querySelectorAll('.sm-socials-link')) as HTMLElement[];
+        const actionBtns = Array.from(panel.querySelectorAll('.sm-action-btn')) as HTMLElement[];
         if (socialTitle) gsap.set(socialTitle, { opacity: 0 });
         if (socialLinks.length) gsap.set(socialLinks, { y: 25, opacity: 0 });
+        if (actionBtns.length) gsap.set(actionBtns, { y: 25, opacity: 0 });
 
         busyRef.current = false;
       }
@@ -505,9 +534,9 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
               {items && items.length ? (
                 items.map((it, idx) => (
                   <li className="sm-panel-itemWrap relative overflow-hidden leading-none flex flex-col" key={it.label + idx}>
-                    <div className="flex items-center justify-between w-full">
+                    <div className="flex items-center justify-between w-full py-2 md:py-3">
                       <a
-                        className="sm-panel-item relative text-gray-200 font-bold text-3xl md:text-4xl cursor-pointer leading-none tracking-tight uppercase transition-[background,color] duration-150 ease-linear inline-block no-underline pr-[1.4em] font-sans"
+                        className="sm-panel-item relative text-gray-200 font-bold text-xl sm:text-3xl md:text-4xl cursor-pointer leading-none tracking-tight uppercase transition-[background,color] duration-150 ease-linear inline-block no-underline pr-12 md:pr-[1.8em] font-sans"
                         href={it.link}
                         aria-label={it.ariaLabel}
                         data-index={idx + 1}
@@ -526,7 +555,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                       </a>
                       {it.subItems && (
                         <button 
-                          className="text-gray-400 p-2 ml-auto"
+                          className="text-gray-400 p-2 ml-auto shrink-0"
                           onClick={(e) => {
                             e.preventDefault();
                             setExpandedItem(expandedItem === it.label ? null : it.label);
@@ -547,14 +576,21 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                           {it.subItems.map((sub, j) => (
                             <li key={j} className="overflow-hidden">
                               {sub.isHeader ? (
-                                <span className="block text-xs font-bold text-blue-400 uppercase tracking-wider mt-2 mb-1">{sub.label}</span>
+                                <div className="flex items-center gap-3 mt-4 mb-2 opacity-70">
+                                  <div className="w-4 h-[1px] bg-blue-400" />
+                                  <span className="block text-xs font-bold text-blue-400 uppercase tracking-[0.2em]">{sub.label}</span>
+                                </div>
                               ) : (
                                 <a 
                                   href={sub.link} 
                                   onClick={closeMenu}
-                                  className="text-xl md:text-2xl text-gray-400 hover:text-white transition-colors font-medium font-sans uppercase block py-1"
+                                  className="group flex items-center gap-4 text-xl md:text-2xl text-gray-400 hover:text-white transition-all font-medium font-sans uppercase py-1.5"
                                 >
-                                  {sub.label}
+                                  <div className="relative flex items-center justify-center w-4 h-4 shrink-0">
+                                    <div className="w-1.5 h-1.5 bg-gray-600 rotate-45 group-hover:bg-cyan-400 transition-colors duration-300 shadow-[0_0_0_rgba(34,211,238,0)] group-hover:shadow-[0_0_10px_rgba(34,211,238,1)]" />
+                                    <div className="absolute inset-0 border border-cyan-400/0 rotate-45 scale-50 group-hover:border-cyan-400/50 group-hover:scale-110 transition-all duration-500" />
+                                  </div>
+                                  <span className="group-hover:translate-x-2 transition-transform duration-300">{sub.label}</span>
                                 </a>
                               )}
                             </li>
@@ -574,6 +610,32 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                 </li>
               )}
             </ul>
+
+            {actionButtons && actionButtons.length > 0 && (
+              <div className="sm-actions mt-6 flex flex-col gap-3">
+                {actionButtons.map((btn, i) => btn.primary ? (
+                  <a
+                    key={btn.label + i}
+                    href={btn.link}
+                    className="sm-action-btn relative px-6 py-3 rounded-none font-semibold text-sm text-white transition-all duration-300 hover:scale-[1.03] flex items-center justify-center overflow-hidden group border border-white/10 hover:shadow-[0_0_20px_rgba(103,186,244,0.6)]"
+                    style={{ background: "linear-gradient(90deg, #1e466b, #67baf4)" }}
+                  >
+                    <div className="absolute top-0 left-[-150%] w-[150%] h-full bg-linear-to-r from-transparent via-white/40 to-transparent skew-x-[-25deg] group-hover:left-[150%] transition-all duration-700 ease-in-out" />
+                    <span className="relative z-10 drop-shadow-md tracking-widest uppercase">{btn.label}</span>
+                  </a>
+                ) : (
+                  <a
+                    key={btn.label + i}
+                    href={btn.link}
+                    className="sm-action-btn relative px-6 py-3 rounded-none font-semibold text-sm text-cyan-400 border border-cyan-500/50 hover:border-cyan-300 transition-all duration-300 flex items-center justify-center overflow-hidden group hover:shadow-[0_0_15px_rgba(34,211,238,0.4)]"
+                  >
+                    <div className="absolute inset-0 bg-cyan-400/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+                    <div className="absolute inset-0 bg-cyan-400/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out delay-75" />
+                    <span className="relative z-10 group-hover:text-cyan-100 transition-colors duration-300 tracking-widest uppercase">{btn.label}</span>
+                  </a>
+                ))}
+              </div>
+            )}
 
             {displaySocials && socialItems && socialItems.length > 0 && (
               <div className="sm-socials mt-auto pt-8 flex flex-col gap-3" aria-label="Social links">
@@ -636,7 +698,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 .sm-scope .sm-socials-link:hover { color: var(--sm-accent, #ff0000); }
 .sm-scope .sm-panel-title { margin: 0; font-size: 1rem; font-weight: 600; color: #fff; text-transform: uppercase; }
 .sm-scope .sm-panel-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
-.sm-scope .sm-panel-item { position: relative; color: #e5e7eb; font-weight: 700; cursor: pointer; line-height: 1; letter-spacing: -1px; text-transform: uppercase; transition: background 0.25s, color 0.25s; display: inline-block; text-decoration: none; padding-right: 1.4em; }
+.sm-scope .sm-panel-item { position: relative; color: #e5e7eb; font-weight: 700; cursor: pointer; line-height: 1; letter-spacing: -1px; text-transform: uppercase; transition: background 0.25s, color 0.25s; display: inline-block; text-decoration: none; }
 .sm-scope .sm-panel-itemLabel { display: inline-block; will-change: transform; transform-origin: 50% 100%; }
 .sm-scope .sm-panel-item:hover { color: var(--sm-accent, #ff0000); }
 .sm-scope .sm-panel-list[data-numbering] { counter-reset: smItem; }

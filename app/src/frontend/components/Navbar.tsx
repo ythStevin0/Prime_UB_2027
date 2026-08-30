@@ -167,12 +167,14 @@ export default function Navbar() {
                 ]
               },
               { label: 'Timeline', ariaLabel: 'Timeline', link: '/#events' },
-              { label: 'Merchandise', ariaLabel: 'Merchandise', link: '/merchandise' },
-              { label: 'Submit Karya', ariaLabel: 'Submit Karya', link: '/submit' },
-              { label: 'Daftar Sekarang', ariaLabel: 'Daftar Sekarang', link: '/register' }
+              { label: 'Merchandise', ariaLabel: 'Merchandise', link: '/merchandise' }
+            ]}
+            actionButtons={[
+              { label: 'Submit Karya', link: '/submit', primary: false },
+              { label: 'Daftar Sekarang', link: '/register', primary: true }
             ]}
             socialItems={[
-              { label: 'Instagram', link: 'https://instagram.com/primeub' },
+              { label: 'Instagram', link: 'https://www.instagram.com/prime.ub/' },
               { label: 'LinkedIn', link: 'https://linkedin.com/company/primeub' }
             ]}
             displaySocials

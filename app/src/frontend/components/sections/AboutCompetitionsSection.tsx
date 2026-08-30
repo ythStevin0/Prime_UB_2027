@@ -25,7 +25,7 @@ export default function AboutCompetitionsSection() {
       <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
         
         {/* === LEFT SIDE: COMPETITIONS === */}
-        <div className="flex flex-col justify-center">
+        <div className="flex flex-col justify-center order-2 lg:order-1">
           
           <motion.div
             variants={fadeUp}
@@ -109,7 +109,7 @@ export default function AboutCompetitionsSection() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="relative w-full h-fit lg:self-start border border-white/10 bg-[#0a0a0a] rounded-none overflow-hidden group flex flex-col mt-8 lg:mt-0"
+          className="relative w-full h-fit lg:self-start border border-white/10 bg-[#0a0a0a] rounded-none overflow-hidden group flex flex-col mt-8 lg:mt-0 order-1 lg:order-2"
         >
           {/* Glassmorphism Abstract Background (Sebagai ganti gambar daun) */}
           <div className="absolute inset-0 z-0 pointer-events-none">
