@@ -16,12 +16,6 @@ import FooterSection from "@frontend/components/sections/FooterSection";
  * Field `logo` opsional — jika tidak ada, akan tampil placeholder inisial.
  */
 
-const organizedBy = [
-  { name: "Teknik Perminyakan UB" },
-  { name: "HMTM FT UB" },
-  { name: "BEM FT UB" },
-];
-
 const supportedBy = [
   { name: "Universitas Brawijaya" },
   { name: "Fakultas Teknik UB" },

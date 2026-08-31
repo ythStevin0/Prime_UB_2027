@@ -577,7 +577,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                             <li key={j} className="overflow-hidden">
                               {sub.isHeader ? (
                                 <div className="flex items-center gap-3 mt-4 mb-2 opacity-70">
-                                  <div className="w-4 h-[1px] bg-blue-400" />
+                                  <div className="w-4 h-1px bg-blue-400" />
                                   <span className="block text-xs font-bold text-blue-400 uppercase tracking-[0.2em]">{sub.label}</span>
                                 </div>
                               ) : (
@@ -612,26 +612,35 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
             </ul>
 
             {actionButtons && actionButtons.length > 0 && (
-              <div className="sm-actions mt-6 flex flex-col gap-3">
+              <div className="sm-actions mt-6 flex flex-col gap-5 items-center">
                 {actionButtons.map((btn, i) => btn.primary ? (
-                  <a
+                  <div 
                     key={btn.label + i}
-                    href={btn.link}
-                    className="sm-action-btn relative px-6 py-3 rounded-none font-semibold text-sm text-white transition-all duration-300 hover:scale-[1.03] flex items-center justify-center overflow-hidden group border border-white/10 hover:shadow-[0_0_20px_rgba(103,186,244,0.6)]"
-                    style={{ background: "linear-gradient(90deg, #1e466b, #67baf4)" }}
+                    className="relative p-px group cursor-pointer hover:shadow-[0_0_20px_rgba(34,211,238,0.3)] transition-shadow duration-300 w-full" 
+                    style={{ clipPath: "polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)" }}
                   >
-                    <div className="absolute top-0 left-[-150%] w-[150%] h-full bg-linear-to-r from-transparent via-white/40 to-transparent skew-x-[-25deg] group-hover:left-[150%] transition-all duration-700 ease-in-out" />
-                    <span className="relative z-10 drop-shadow-md tracking-widest uppercase">{btn.label}</span>
-                  </a>
+                    <div className="absolute inset-0 bg-linear-to-br from-blue-500/50 via-cyan-400/30 to-purple-500/50 group-hover:from-cyan-400 group-hover:to-blue-500 transition-colors duration-500" />
+                    
+                    <a
+                      href={btn.link}
+                      className="relative flex items-center justify-center px-8 py-3.5 font-bold text-sm text-white tracking-widest uppercase bg-[#050505] group-hover:bg-[#0a0a0a] transition-colors duration-300 overflow-hidden w-full"
+                      style={{ clipPath: "polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)" }}
+                    >
+                      <div className="absolute inset-0 bg-blue-500/10 group-hover:bg-cyan-400/10 transition-colors duration-500" />
+                      <div className="absolute top-0 left-[-150%] w-[150%] h-full bg-linear-to-r from-transparent via-cyan-300/30 to-transparent skew-x-[-25deg] group-hover:left-[150%] transition-all duration-700 ease-in-out" />
+                      <span className="relative z-10 group-hover:text-cyan-100 drop-shadow-md transition-colors duration-300">{btn.label}</span>
+                    </a>
+                  </div>
                 ) : (
                   <a
                     key={btn.label + i}
                     href={btn.link}
-                    className="sm-action-btn relative px-6 py-3 rounded-none font-semibold text-sm text-cyan-400 border border-cyan-500/50 hover:border-cyan-300 transition-all duration-300 flex items-center justify-center overflow-hidden group hover:shadow-[0_0_15px_rgba(34,211,238,0.4)]"
+                    className="group relative flex items-center justify-center gap-2 px-2 py-2 font-semibold text-sm text-cyan-400 hover:text-cyan-300 transition-colors duration-300 tracking-widest uppercase"
                   >
-                    <div className="absolute inset-0 bg-cyan-400/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
-                    <div className="absolute inset-0 bg-cyan-400/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out delay-75" />
-                    <span className="relative z-10 group-hover:text-cyan-100 transition-colors duration-300 tracking-widest uppercase">{btn.label}</span>
+                    <span className="text-cyan-500/40 group-hover:text-cyan-300 group-hover:translate-x-1 transition-all duration-300 ease-out text-lg leading-none font-light">[</span>
+                    <span className="relative z-10">{btn.label}</span>
+                    <span className="text-cyan-500/40 group-hover:text-cyan-300 group-hover:-translate-x-1 transition-all duration-300 ease-out text-lg leading-none font-light">]</span>
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-px bg-cyan-400/50 group-hover:w-2/3 transition-all duration-500 shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
                   </a>
                 ))}
               </div>
