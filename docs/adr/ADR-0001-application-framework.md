@@ -23,15 +23,16 @@ Prime UB 2027 membutuhkan framework full-stack yang mendukung:
 
 ## Keputusan
 
-**Next.js 15 dengan App Router** dipilih sebagai framework utama.
+**Next.js 15 dengan App Router** dipilih sebagai framework utama frontend.
+**Hono.js** dipilih sebagai API backend handler yang berjalan di dalam Next.js (Hybrid Architecture).
 
 ## Alasan
 
 1. Server Components mengurangi bundle JavaScript di client
 2. App Router mendukung layout bersarang, loading/error states bawaan
-3. API routes terintegrasi (tidak perlu backend terpisah)
+3. Hono.js memberikan abstraksi routing yang lebih baik (seperti Express) dibandingkan Next.js API Routes murni, namun tetap bisa di-deploy menjadi satu kesatuan (monolith)
 4. Komunitas developer Indonesia yang besar
-5. Deployment mudah di Vercel
+5. Deployment mudah di Vercel (karena Hono kompatibel dengan Edge/Serverless Next.js)
 6. Kompatibel dengan semua skill yang terinstal (shadcn/ui, Tailwind)
 
 ## Konsekuensi
