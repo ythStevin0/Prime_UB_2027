@@ -5,7 +5,7 @@
 
 ## Keputusan
 
-- **Database:** PostgreSQL (via Railway)
+- **Database:** PostgreSQL (via Podman untuk local development)
 - **ORM:** Drizzle ORM
 
 ## Alasan
@@ -13,7 +13,7 @@
 ### PostgreSQL
 - Relational database yang kuat untuk data transaksional
 - Dukungan JSON, full-text search, indexing yang baik
-- Standar industri, hosting tersedia di mana-mana
+- Berjalan di Podman Container memastikan konsistensi *environment* tanpa membebani sistem host Windows secara langsung.
 
 ### Drizzle ORM
 - Type-safe query builder, dekat dengan SQL
@@ -25,4 +25,5 @@
 
 - Perlu menulis SQL-like syntax (bukan abstraksi tinggi seperti Prisma)
 - Migrasi menggunakan `drizzle-kit`
-- Koneksi pool menggunakan `postgres` atau `@neondatabase/serverless`
+- Wajib menyalakan Podman machine sebelum melakukan development
+- Koneksi pool menggunakan `postgres.js` driver (bukan serverless)
