@@ -82,9 +82,9 @@ export default function HeroSection() {
       {/* ======= BOTTOM CONTENT — Split Left/Right ======= */}
       <div className="relative z-20 w-full pb-6 md:pb-10 mt-4 md:-mt-36">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-stretch">
             {/* ---- LEFT: Title ---- */}
-            <div className="flex flex-col text-center md:text-left items-center md:items-start">
+            <div className="flex flex-col justify-end text-center md:text-left items-center md:items-start">
               {/* Badge */}
               <motion.div
                 className="flex items-center gap-3 mb-4"
@@ -120,19 +120,9 @@ export default function HeroSection() {
             </div>
 
             {/* ---- RIGHT: Description + CTA ---- */}
-            <div className="flex flex-col gap-6 md:max-w-sm md:ml-auto text-center md:text-right items-center md:items-end md:mt-6">
+            <div className="flex flex-col justify-end gap-6 md:max-w-sm md:ml-auto text-center md:text-right items-center md:items-end">
               {/* Bold statement */}
-              <motion.p
-                className="text-lg md:text-xl font-bold text-white leading-snug"
-                style={{ textShadow: "0 2px 15px rgba(0,0,0,1), 0 0 5px rgba(0,0,0,0.8)" }}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={2}
-              >
-                Inovasi riset dan keahlian industri untuk <span className="text-orange-400">solusi</span> <span className="text-purple-400">energi</span> <span className="text-rose-400">masa depan.</span>
-              </motion.p>
+
 
               {/* Description */}
               <motion.p
