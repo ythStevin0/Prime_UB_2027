@@ -4,7 +4,12 @@ import { users, competitions } from '@backend/lib/db/schema';
 import { AppError } from '@backend/lib/errors';
 import type { AppEnv } from '@backend/lib/types';
 
+import { identityRoutes } from '@backend/modules/identity/routes/identity.routes';
+
 const api = new Hono<AppEnv>();
+
+// ─── Module Routes ─────────────────────────────────────────
+api.route('/auth', identityRoutes);
 
 // ─── Health Check ─────────────────────────────────────────
 api.get('/health', (c) => {
