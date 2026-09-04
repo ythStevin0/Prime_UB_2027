@@ -38,7 +38,7 @@ export const users = pgTable('users', {
   email: varchar('email', { length: 255 }).notNull().unique(),
   emailVerifiedAt: timestamp('email_verified_at'),
   passwordHash: text('password_hash'),
-  role: varchar('role', { enum: ['USER', 'ADMIN', 'JURY', 'STAFF'] })
+  role: varchar('role', { enum: ['USER', 'ADMIN'] })
     .default('USER')
     .notNull(),
   phone: varchar('phone', { length: 50 }),
@@ -79,7 +79,7 @@ export const sessions = pgTable('sessions', {
   userId: uuid('user_id')
     .references(() => users.id, { onDelete: 'cascade' })
     .notNull(),
-  expiresAt: timestamp('expires_at').notNull(),
+  expires: timestamp('expires', { mode: 'date' }).notNull(),
 });
 
 /**
@@ -88,7 +88,7 @@ export const sessions = pgTable('sessions', {
 export const verificationTokens = pgTable('verification_tokens', {
   identifier: varchar('identifier', { length: 255 }).notNull(),
   token: varchar('token', { length: 255 }).notNull().unique(),
-  expiresAt: timestamp('expires_at').notNull(),
+  expires: timestamp('expires', { mode: 'date' }).notNull(),
 });
 
 // ═══════════════════════════════════════════════════════════

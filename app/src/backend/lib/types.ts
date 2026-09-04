@@ -9,11 +9,13 @@
 import type { Logger } from './logger';
 
 /** Hono environment type with custom context variables */
-export type AppEnv = {
+export interface AppEnv {
   Variables: {
     /** Unique ID generated per request for tracing */
     requestId: string;
     /** Request-scoped logger (child of global logger with requestId) */
     logger: Logger;
+    /** Auth.js session (injected by requireAuth guard) */
+    session?: import('next-auth').Session;
   };
-};
+}
