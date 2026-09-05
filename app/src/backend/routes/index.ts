@@ -7,6 +7,8 @@ import type { AppEnv } from '@backend/lib/types';
 import { identityRoutes } from '@backend/modules/identity/routes/identity.routes';
 import { competitionRoutes } from '@backend/modules/competitions/routes/competition.routes';
 import { adminCompetitionRoutes } from '@backend/modules/competitions/routes/admin.competition.routes';
+import { registrationRoutes } from '@backend/modules/registrations/routes/registration.routes';
+import { adminRegistrationRoutes } from '@backend/modules/registrations/routes/admin.registration.routes';
 
 const api = new Hono<AppEnv>();
 
@@ -14,6 +16,8 @@ const api = new Hono<AppEnv>();
 api.route('/auth', identityRoutes);
 api.route('/competitions', competitionRoutes);
 api.route('/admin/competitions', adminCompetitionRoutes);
+api.route('/registrations', registrationRoutes);
+api.route('/admin/registrations', adminRegistrationRoutes);
 
 // ─── Health Check ─────────────────────────────────────────
 api.get('/health', (c) => {
