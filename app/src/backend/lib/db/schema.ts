@@ -138,6 +138,9 @@ export const registrations = pgTable('registrations', {
     .references(() => competitions.id)
     .notNull(),
   teamName: varchar('team_name', { length: 255 }),
+  whatsapp: varchar('whatsapp', { length: 255 }),
+  domisili: varchar('domisili', { length: 255 }),
+  instansi: varchar('instansi', { length: 255 }),
   status: varchar('status', {
     enum: ['PENDING', 'APPROVED', 'REJECTED'],
   })
@@ -287,3 +290,10 @@ export const submissionsRelations = relations(submissions, ({ one }) => ({
     references: [registrations.id],
   }),
 }));
+export const passwordResetRequests = pgTable('password_reset_requests', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  email: varchar('email', { length: 255 }).notNull(),
+  status: varchar('status').notNull().default('PENDING'),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull()
+});

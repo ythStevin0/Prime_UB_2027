@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import { competitionsData } from "@/frontend/data/competitions";
 import Navbar from "@/frontend/components/Navbar";
 import FooterSection from "@/frontend/components/sections/FooterSection";
@@ -43,7 +44,7 @@ export default async function CompetitionDetailPage({ params }: { params: Promis
           {/* Large Icon / Illustration */}
           {comp.image ? (
             <div className="mb-8 w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 relative flex items-center justify-center">
-              <img src={comp.image} alt={comp.title} className="w-full h-full object-contain" />
+              <Image src={comp.image} alt={comp.title} fill className="object-contain" sizes="(max-width: 768px) 256px, (max-width: 1024px) 320px, 384px" />
             </div>
           ) : (
             <div className="mb-8 p-6 glass rounded-none border border-white/10 shadow-[0_0_40px_rgba(34,211,238,0.2)]">

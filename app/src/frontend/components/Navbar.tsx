@@ -5,11 +5,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { competitionsData } from "../data/competitions";
 import { eventsData } from "../data/events";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, LogOut } from "lucide-react";
 import StaggeredMenu from "./StaggeredMenu";
+import { useSession, signOut } from "next-auth/react";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+    if (session) {
+      console.log("Navbar Session:", session);
+    }
+  }, [session]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -114,39 +122,64 @@ export default function Navbar() {
 
         {/* CTA Buttons */}
         <div className="hidden md:flex gap-4 items-center">
-          {/* 1. Submit Karya - HUD Bracket Style */}
-          <Link
-            href="/submit"
-            className="group relative flex items-center justify-center gap-1.5 px-1 py-1.5 font-semibold text-[13px] text-cyan-400 hover:text-cyan-300 transition-colors duration-300 tracking-wider uppercase"
-          >
-            <span className="text-cyan-500/40 group-hover:text-cyan-300 group-hover:translate-x-1 transition-all duration-300 ease-out text-base leading-none font-light">[</span>
-            <span className="relative z-10">Submit Karya</span>
-            <span className="text-cyan-500/40 group-hover:text-cyan-300 group-hover:-translate-x-1 transition-all duration-300 ease-out text-base leading-none font-light">]</span>
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-px bg-cyan-400/50 group-hover:w-2/3 transition-all duration-500 shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
-          </Link>
+          
+          {status === "authenticated" ? (
+            <>
+              {/* 1. Submit Karya - HUD Bracket Style (Only when logged in) */}
+              <Link
+                href="/submit"
+                className="group relative flex items-center justify-center gap-1.5 px-1 py-1.5 font-semibold text-[13px] text-cyan-400 hover:text-cyan-300 transition-colors duration-300 tracking-wider uppercase"
+              >
+                <span className="text-cyan-500/40 group-hover:text-cyan-300 group-hover:translate-x-1 transition-all duration-300 ease-out text-base leading-none font-light">[</span>
+                <span className="relative z-10">Submit Karya</span>
+                <span className="text-cyan-500/40 group-hover:text-cyan-300 group-hover:-translate-x-1 transition-all duration-300 ease-out text-base leading-none font-light">]</span>
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-px bg-cyan-400/50 group-hover:w-2/3 transition-all duration-500 shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
+              </Link>
+              
+              {/* Logout Button */}
+              <button
+                onClick={() => signOut({ callbackUrl: '/' })}
+                className="group relative flex items-center justify-center gap-1.5 px-3 py-1.5 font-semibold text-[13px] text-gray-400 hover:text-red-400 transition-colors duration-300 tracking-wider uppercase"
+                title={`Logged in as ${session?.user?.email}`}
+              >
+                <LogOut className="w-4 h-4" />
+                <span className="hidden md:inline relative z-10">Logout</span>
+              </button>
+            </>
+          ) : (
+            <>
+              {/* Login Button */}
+              <Link
+                href="/login"
+                className="group relative flex items-center justify-center gap-1.5 px-3 py-1.5 font-semibold text-[13px] text-gray-300 hover:text-white transition-colors duration-300 tracking-wider uppercase"
+              >
+                <span className="relative z-10">Login</span>
+              </Link>
 
-          {/* 2. Daftar Sekarang - Cyberpunk Clipped Style */}
-          <div 
-            className="relative p-px group cursor-pointer hover:shadow-[0_0_20px_rgba(34,211,238,0.3)] transition-shadow duration-300" 
-            style={{ clipPath: "polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)" }}
-          >
-            {/* Glowing Border layer */}
-            <div className="absolute inset-0 bg-linear-to-br from-blue-500/50 via-cyan-400/30 to-purple-500/50 group-hover:from-cyan-400 group-hover:to-blue-500 transition-colors duration-500" />
-            
-            <Link
-              href="/register"
-              className="relative flex items-center justify-center px-5 py-2 font-semibold text-[13px] text-white tracking-wider uppercase bg-[#050505] group-hover:bg-[#0a0a0a] transition-colors duration-300 overflow-hidden"
-              style={{ clipPath: "polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)" }}
-            >
-              {/* Holographic background fill */}
-              <div className="absolute inset-0 bg-blue-500/10 group-hover:bg-cyan-400/10 transition-colors duration-500" />
-              
-              {/* Shimmer sweep */}
-              <div className="absolute top-0 left-[-150%] w-[150%] h-full bg-linear-to-r from-transparent via-cyan-300/30 to-transparent skew-x-[-25deg] group-hover:left-[150%] transition-all duration-700 ease-in-out" />
-              
-              <span className="relative z-10 group-hover:text-cyan-100 drop-shadow-md transition-colors duration-300">Daftar Sekarang</span>
-            </Link>
-          </div>
+              {/* 2. Daftar Sekarang - Cyberpunk Clipped Style */}
+              <div 
+                className="relative p-px group cursor-pointer hover:shadow-[0_0_20px_rgba(34,211,238,0.3)] transition-shadow duration-300" 
+                style={{ clipPath: "polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)" }}
+              >
+                {/* Glowing Border layer */}
+                <div className="absolute inset-0 bg-linear-to-br from-blue-500/50 via-cyan-400/30 to-purple-500/50 group-hover:from-cyan-400 group-hover:to-blue-500 transition-colors duration-500" />
+                
+                <Link
+                  href="/register"
+                  className="relative flex items-center justify-center px-5 py-2 font-semibold text-[13px] text-white tracking-wider uppercase bg-[#050505] group-hover:bg-[#0a0a0a] transition-colors duration-300 overflow-hidden"
+                  style={{ clipPath: "polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)" }}
+                >
+                  {/* Holographic background fill */}
+                  <div className="absolute inset-0 bg-blue-500/10 group-hover:bg-cyan-400/10 transition-colors duration-500" />
+                  
+                  {/* Shimmer sweep */}
+                  <div className="absolute top-0 left-[-150%] w-[150%] h-full bg-linear-to-r from-transparent via-cyan-300/30 to-transparent skew-x-[-25deg] group-hover:left-[150%] transition-all duration-700 ease-in-out" />
+                  
+                  <span className="relative z-10 group-hover:text-cyan-100 drop-shadow-md transition-colors duration-300">Daftar Sekarang</span>
+                </Link>
+              </div>
+            </>
+          )}
         </div>
 
         {/* Mobile Menu Button (Hamburger) */}

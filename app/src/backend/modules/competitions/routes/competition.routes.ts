@@ -1,7 +1,7 @@
 import { Hono } from 'hono';
 import { zValidator } from '@hono/zod-validator';
 import type { AppEnv } from '@backend/lib/types';
-import { ApiResponse, calcPagination } from '@backend/lib/response';
+import { ApiResponse } from '@backend/lib/response';
 import { AppError } from '@backend/lib/errors';
 import { competitionService } from '../services/competition.service';
 import { competitionQuerySchema } from '../schemas/competition.schemas';
@@ -28,7 +28,6 @@ competitionRoutes.get(
       search: query.search,
       status: query.status,
       type: query.type,
-      isAdminQuery: false, // Ensure public filter rules apply
     });
     
     return c.json(
@@ -51,7 +50,7 @@ competitionRoutes.get(
 competitionRoutes.get('/:slug', async (c) => {
   const slug = c.req.param('slug');
   
-  const competition = await competitionService.getCompetitionBySlug(slug, false);
+  const competition = await competitionService.getCompetitionBySlug(slug);
   
   return c.json(ApiResponse.success(competition));
 });

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import SmoothScrollProvider from "@/frontend/components/SmoothScrollProvider";
+import AuthProvider from "@/frontend/providers/AuthProvider";
 
 const inter = Inter({
   variable: "--font-geist-sans",
@@ -49,9 +50,11 @@ export default function RootLayout({
       className={`${inter.variable} ${jetbrainsMono.variable}`}
     >
       <body className="min-h-screen flex flex-col antialiased">
-        <SmoothScrollProvider>
-          {children}
-        </SmoothScrollProvider>
+        <AuthProvider>
+          <SmoothScrollProvider>
+            {children}
+          </SmoothScrollProvider>
+        </AuthProvider>
       </body>
     </html>
   );
