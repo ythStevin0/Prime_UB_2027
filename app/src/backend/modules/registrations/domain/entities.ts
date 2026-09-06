@@ -5,6 +5,9 @@ export interface Registration {
   userId: string;
   competitionId: string;
   teamName: string | null;
+  whatsapp: string | null;
+  domisili: string | null;
+  instansi: string | null;
   status: RegistrationStatus;
   createdAt: Date;
   updatedAt: Date;

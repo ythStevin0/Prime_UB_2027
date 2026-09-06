@@ -7,6 +7,9 @@ import type { Registration, RegistrationMember, RegistrationWithMembers, Registr
 export interface RegisterPayload {
   competitionId: string;
   teamName: string | null;
+  whatsapp: string;
+  domisili: string;
+  instansi: string;
   members: Omit<RegistrationMember, 'id' | 'registrationId'>[];
 }
 
@@ -48,6 +51,9 @@ class RegistrationService {
         userId,
         competitionId: payload.competitionId,
         teamName: payload.teamName,
+        whatsapp: payload.whatsapp,
+        domisili: payload.domisili,
+        instansi: payload.instansi,
       },
       payload.members
     );

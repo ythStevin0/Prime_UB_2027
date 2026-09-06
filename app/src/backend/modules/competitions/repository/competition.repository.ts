@@ -78,42 +78,6 @@ class CompetitionRepository {
     };
   }
 
-  /**
-   * Insert a new competition.
-   */
-  async create(data: Omit<Competition, 'id' | 'createdAt' | 'updatedAt'>): Promise<Competition> {
-    const [result] = await db
-      .insert(competitions)
-      .values(data)
-      .returning();
-      
-    return result as unknown as Competition;
-  }
-
-  /**
-   * Update an existing competition.
-   */
-  async update(id: string, data: Partial<Omit<Competition, 'id' | 'createdAt' | 'updatedAt'>>): Promise<Competition | null> {
-    const [result] = await db
-      .update(competitions)
-      .set({ ...data, updatedAt: new Date() })
-      .where(eq(competitions.id, id))
-      .returning();
-      
-    return result ? (result as unknown as Competition) : null;
-  }
-  
-  /**
-   * Delete a competition (hard delete).
-   */
-  async delete(id: string): Promise<boolean> {
-    const [result] = await db
-      .delete(competitions)
-      .where(eq(competitions.id, id))
-      .returning({ id: competitions.id });
-      
-    return !!result;
-  }
 }
 
 export const competitionRepository = new CompetitionRepository();

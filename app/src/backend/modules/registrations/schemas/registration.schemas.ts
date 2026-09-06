@@ -12,10 +12,12 @@ export const registerMemberSchema = z.object({
   isLeader: z.boolean().default(false),
 });
 
-// Schema for participants to submit registration
 export const createRegistrationSchema = z.object({
   competitionId: z.string().uuid('Invalid competition ID'),
-  teamName: z.string().max(255).optional().nullable().default(null),
+  teamName: z.string().max(255).min(1, 'Nama Tim is required'),
+  whatsapp: z.string().min(5, 'WhatsApp number is required').max(255),
+  domisili: z.string().min(2, 'Domisili is required').max(255),
+  instansi: z.string().min(2, 'Instansi is required').max(255),
   members: z.array(registerMemberSchema).min(1, 'At least one member is required'),
 });
 
