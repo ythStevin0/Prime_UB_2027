@@ -22,19 +22,22 @@ export default async function AdminDashboardPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-white tracking-tight">Dashboard Overview</h1>
-        <p className="text-gray-400 mt-1">Welcome back. Here is what&apos;s happening today.</p>
+        <h1 className="text-3xl font-mono font-bold text-cyan-400 tracking-tighter uppercase flex items-center gap-2">
+          <span className="w-4 h-4 bg-cyan-500 animate-pulse" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%)' }} />
+          Dashboard Overview
+        </h1>
+        <p className="text-gray-400 mt-1 font-mono text-sm tracking-wide">SYSTEM INITIALIZED. AWAITING COMMAND.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {stats.map((stat, i) => (
           <AdminCard key={i} className="flex items-center p-6 gap-4">
-            <div className={`p-4 rounded-xl ${stat.bg}`}>
+            <div className={`p-4 border ${stat.bg.replace('/10', '/20')} border-${stat.color.split('-')[1]}-500/30`}>
               <stat.icon className={`w-8 h-8 ${stat.color}`} />
             </div>
             <div>
-              <p className="text-sm font-medium text-gray-400">{stat.name}</p>
-              <p className="text-3xl font-bold text-white mt-1">{stat.value}</p>
+              <p className="text-xs font-mono font-medium text-gray-400 tracking-widest uppercase">{stat.name}</p>
+              <p className="text-4xl font-mono font-bold text-white mt-1 tracking-tight">{String(stat.value).padStart(2, '0')}</p>
             </div>
           </AdminCard>
         ))}
@@ -49,11 +52,17 @@ export default async function AdminDashboardPage() {
         
         <AdminCard title="Quick Actions">
           <div className="grid grid-cols-2 gap-4">
-            <a href="/admin/registrations" className="flex items-center justify-center p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg transition-colors text-sm font-medium text-white">
-              Review Registrations
+            <a href="/admin/registrations" className="relative group flex items-center justify-center p-4 bg-cyan-950/20 hover:bg-cyan-900/40 border border-cyan-900/50 transition-colors text-sm font-mono font-medium text-cyan-400 tracking-widest uppercase overflow-hidden">
+              <span className="group-hover:-translate-x-2 transition-transform">[</span>
+              <span className="mx-2 relative z-10">Review Regs</span>
+              <span className="group-hover:translate-x-2 transition-transform">]</span>
+              <div className="absolute top-0 left-0 w-full h-0.5 bg-cyan-400 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
             </a>
-            <a href="/admin/password-resets" className="flex items-center justify-center p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg transition-colors text-sm font-medium text-white">
-              Password Resets
+            <a href="/admin/password-resets" className="relative group flex items-center justify-center p-4 bg-cyan-950/20 hover:bg-cyan-900/40 border border-cyan-900/50 transition-colors text-sm font-mono font-medium text-cyan-400 tracking-widest uppercase overflow-hidden">
+              <span className="group-hover:-translate-x-2 transition-transform">[</span>
+              <span className="mx-2 relative z-10">Reset PWD</span>
+              <span className="group-hover:translate-x-2 transition-transform">]</span>
+              <div className="absolute top-0 left-0 w-full h-0.5 bg-cyan-400 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
             </a>
           </div>
         </AdminCard>

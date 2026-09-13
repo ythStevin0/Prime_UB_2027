@@ -16,7 +16,7 @@ import type { AppEnv } from '@backend/lib/types';
 const identityRoutes = new Hono<AppEnv>();
 
 /**
- * POST /api/auth/register
+ * POST /api/identity/register
  * Register a new user.
  */
 identityRoutes.post(
@@ -55,7 +55,7 @@ identityRoutes.post(
 );
 
 /**
- * GET /api/auth/me
+ * GET /api/identity/me
  * Get current authenticated user profile.
  */
 identityRoutes.get('/me', requireAuth, async (c) => {
@@ -84,7 +84,7 @@ identityRoutes.get('/me', requireAuth, async (c) => {
 });
 
 /**
- * PATCH /api/auth/me
+ * PATCH /api/identity/me
  * Update current authenticated user profile.
  */
 identityRoutes.patch(

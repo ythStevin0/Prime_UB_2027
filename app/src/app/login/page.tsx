@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Loader2, Lock, Mail } from 'lucide-react';
+import { Lock, Mail } from 'lucide-react';
 import Link from 'next/link';
 import Navbar from "@/frontend/components/Navbar";
 import FooterSection from "@/frontend/components/sections/FooterSection";
@@ -91,11 +91,11 @@ export default function LoginPage() {
             </p>
           </div>
 
-          <div className="bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+          <div className="bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/10 p-8 shadow-2xl relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-blue-500 via-cyan-400 to-purple-500" />
             
             {error && (
-              <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 text-red-400 text-sm font-medium rounded-lg text-center">
+              <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 text-red-400 text-sm font-medium text-center">
                 {error}
               </div>
             )}
@@ -109,7 +109,7 @@ export default function LoginPage() {
                     type="email"
                     name="email"
                     required
-                    className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder:text-gray-600 focus:outline-hidden focus:border-cyan-500/50 focus:bg-cyan-950/10 transition-all duration-300"
+                    className="w-full bg-white/5 border border-white/10 py-3 pl-12 pr-4 text-white placeholder:text-gray-600 focus:outline-hidden focus:border-cyan-500/50 focus:bg-cyan-950/10 transition-all duration-300"
                     placeholder="contoh@email.com"
                   />
                 </div>
@@ -131,14 +131,14 @@ export default function LoginPage() {
                     type="password"
                     name="password"
                     required
-                    className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder:text-gray-600 focus:outline-hidden focus:border-cyan-500/50 focus:bg-cyan-950/10 transition-all duration-300"
+                    className="w-full bg-white/5 border border-white/10 py-3 pl-12 pr-4 text-white placeholder:text-gray-600 focus:outline-hidden focus:border-cyan-500/50 focus:bg-cyan-950/10 transition-all duration-300"
                     placeholder="••••••••"
                   />
                 </div>
               </div>
 
               <div className="pt-4">
-                <div className="relative group p-0.5 overflow-hidden rounded-xl shadow-[0_0_15px_rgba(255,255,255,0.05)] hover:shadow-[0_0_30px_rgba(34,211,238,0.2)] transition-all duration-500">
+                <div className="relative group p-0.5 overflow-hidden shadow-[0_0_15px_rgba(255,255,255,0.05)] hover:shadow-[0_0_30px_rgba(34,211,238,0.2)] transition-all duration-500">
                   {/* Default static border */}
                   <div className="absolute inset-0 bg-white/20 group-hover:opacity-0 transition-opacity duration-300" />
                   
@@ -149,7 +149,7 @@ export default function LoginPage() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="relative flex items-center justify-center gap-2 w-full bg-[#050505] text-white font-bold tracking-widest text-sm uppercase py-4 rounded-[10px] active:scale-[0.98] transition-transform duration-300 disabled:opacity-70 disabled:cursor-not-allowed z-10"
+                    className="relative flex items-center justify-center gap-2 w-full bg-[#050505] text-white font-bold tracking-widest text-sm uppercase py-4 active:scale-[0.98] transition-transform duration-300 disabled:opacity-70 disabled:cursor-not-allowed z-10"
                   >
                     {loading ? (
                       <span className="flex items-center gap-2 text-cyan-400">
@@ -169,10 +169,10 @@ export default function LoginPage() {
             <div className="mt-8 text-center text-sm text-gray-500">
               Belum punya akun?{' '}
               <Link 
-                href="/register" 
+                href="/signup" 
                 className="text-white hover:text-cyan-400 font-medium transition-colors"
               >
-                Daftar sekarang
+                Buat akun baru
               </Link>
             </div>
           </div>

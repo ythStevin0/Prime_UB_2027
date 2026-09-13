@@ -19,6 +19,7 @@ export interface StaggeredMenuActionButton {
   label: string;
   link: string;
   primary?: boolean;
+  onClick?: () => void;
 }
 export interface StaggeredMenuProps {
   position?: 'left' | 'right';
@@ -613,7 +614,15 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 
             {actionButtons && actionButtons.length > 0 && (
               <div className="sm-actions mt-6 flex flex-col gap-5 items-center">
-                {actionButtons.map((btn, i) => btn.primary ? (
+                {actionButtons.map((btn, i) => btn.onClick ? (
+                  <button
+                    key={btn.label + i}
+                    onClick={() => { btn.onClick?.(); closeMenu(); }}
+                    className="group relative flex items-center justify-center gap-2 px-2 py-2 font-semibold text-sm text-red-400 hover:text-red-300 transition-colors duration-300 tracking-widest uppercase"
+                  >
+                    <span className="relative z-10">{btn.label}</span>
+                  </button>
+                ) : btn.primary ? (
                   <div 
                     key={btn.label + i}
                     className="relative p-px group cursor-pointer hover:shadow-[0_0_20px_rgba(34,211,238,0.3)] transition-shadow duration-300 w-full" 
