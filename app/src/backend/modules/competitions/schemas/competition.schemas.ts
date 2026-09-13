@@ -4,8 +4,7 @@ import { paginationSchema } from '@backend/lib/validation';
 export const competitionTypeSchema = z.enum(['TEAM', 'INDIVIDUAL']);
 export const competitionStatusSchema = z.enum(['DRAFT', 'OPEN', 'CLOSED', 'ARCHIVED']);
 
-// Schema for Admin to create a new competition
-export const createCompetitionSchema = z.object({
+const competitionBaseSchema = z.object({
   title: z.string().min(3, 'Title must be at least 3 characters').max(255, 'Title too long'),
   slug: z.string().min(3).max(255).regex(/^[a-z0-9-]+$/, 'Slug can only contain lowercase letters, numbers, and hyphens'),
   type: competitionTypeSchema,
@@ -20,7 +19,10 @@ export const createCompetitionSchema = z.object({
   submissionStartDate: z.coerce.date().nullable().default(null),
   submissionEndDate: z.coerce.date().nullable().default(null),
   status: competitionStatusSchema.default('DRAFT'),
-}).refine(data => {
+});
+
+// Schema for Admin to create a new competition
+export const createCompetitionSchema = competitionBaseSchema.refine(data => {
   if (data.type === 'TEAM') {
     return data.minTeamSize != null && data.maxTeamSize != null;
   }
@@ -55,7 +57,7 @@ export const createCompetitionSchema = z.object({
 });
 
 // Schema for Admin to update a competition (all fields optional)
-export const updateCompetitionSchema = createCompetitionSchema.partial();
+export const updateCompetitionSchema = competitionBaseSchema.partial();
 
 // Schema for querying competitions list (Pagination + filters)
 export const competitionQuerySchema = paginationSchema.extend({

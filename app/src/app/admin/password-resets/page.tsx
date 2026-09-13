@@ -24,15 +24,18 @@ export default async function AdminPasswordResetsPage() {
   return (
     <div className="p-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-white mb-2">Password Resets</h1>
-        <p className="text-gray-400">Manage user password reset requests.</p>
+        <h1 className="text-3xl font-mono font-bold text-cyan-400 tracking-tighter uppercase flex items-center gap-2">
+          <span className="w-4 h-4 bg-cyan-500 animate-pulse" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%)' }} />
+          PASSWORD RESETS
+        </h1>
+        <p className="text-gray-400 mt-1 font-mono text-sm tracking-wide">SYSTEM QUERY: SECURITY PROTOCOLS</p>
       </div>
 
-      <div className="glass bg-black/40 border border-white/10 rounded-xl overflow-hidden">
+      <div className="glass bg-black/40 border border-white/10 border-l-4 border-l-cyan-500/50 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="border-b border-white/5 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+              <tr className="bg-cyan-950/20 border-b border-cyan-900/50 text-xs font-mono font-medium text-cyan-500/70 tracking-widest uppercase">
                 <th className="px-6 py-4">Request ID</th>
                 <th className="px-6 py-4">Email</th>
                 <th className="px-6 py-4">Status</th>
@@ -49,19 +52,19 @@ export default async function AdminPasswordResetsPage() {
                 </tr>
               ) : (
                 requests.map((req) => (
-                  <tr key={req.id} className="hover:bg-white/5 transition-colors">
-                    <td className="px-6 py-4 font-mono text-xs text-gray-400">
+                  <tr key={req.id} className="group hover:bg-cyan-950/20 transition-colors relative">
+                    <td className="px-6 py-4 font-mono text-xs text-cyan-500/50 group-hover:text-cyan-400 transition-colors">
                       {req.id.split("-")[0]}
                     </td>
-                    <td className="px-6 py-4 font-medium text-white">
+                    <td className="px-6 py-4 font-medium text-white group-hover:text-cyan-100 transition-colors">
                       {req.email}
                     </td>
                     <td className="px-6 py-4">
                       <span
-                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${
+                        className={`inline-flex items-center px-2 py-1 text-[10px] font-mono tracking-widest uppercase border-l-2 ${
                           req.status === "PENDING"
-                            ? "bg-yellow-500/10 text-yellow-400 border-yellow-500/20"
-                            : "bg-green-500/10 text-green-400 border-green-500/20"
+                            ? "bg-yellow-500/10 text-yellow-400 border-yellow-500 shadow-[inset_2px_0_5px_rgba(234,179,8,0.2)]"
+                            : "bg-emerald-500/10 text-emerald-400 border-emerald-500 shadow-[inset_2px_0_5px_rgba(16,185,129,0.2)]"
                         }`}
                       >
                         {req.status}
@@ -76,7 +79,7 @@ export default async function AdminPasswordResetsPage() {
                           <input type="hidden" name="id" value={req.id} />
                           <button
                             type="submit"
-                            className="px-3 py-1 bg-cyan-600/20 hover:bg-cyan-600 text-cyan-400 hover:text-white text-xs font-medium rounded transition-colors"
+                            className="px-3 py-1 bg-cyan-950/50 hover:bg-cyan-600/30 text-cyan-400 hover:text-white text-xs font-mono font-medium border border-cyan-500/30 hover:border-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.1)] transition-all uppercase tracking-widest"
                           >
                             Mark Resolved
                           </button>

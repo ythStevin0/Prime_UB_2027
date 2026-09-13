@@ -12,7 +12,7 @@ import { adminRegistrationRoutes } from '@backend/modules/registrations/routes/a
 const api = new Hono<AppEnv>();
 
 // ─── Module Routes ─────────────────────────────────────────
-api.route('/auth', identityRoutes);
+api.route('/identity', identityRoutes);
 api.route('/competitions', competitionRoutes);
 api.route('/registrations', registrationRoutes);
 api.route('/admin/registrations', adminRegistrationRoutes);

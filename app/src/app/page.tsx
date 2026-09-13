@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import SplashScreen from "@frontend/components/SplashScreen";
 import Navbar from "@frontend/components/Navbar";
 import HeroSection from "@frontend/components/sections/HeroSection";
@@ -44,8 +44,16 @@ const mediaPartners = [
 export default function HomePage() {
   const [showSplash, setShowSplash] = useState(true);
 
+  useEffect(() => {
+    const hasShown = sessionStorage.getItem("splashShown");
+    if (hasShown) {
+      setTimeout(() => setShowSplash(false), 0);
+    }
+  }, []);
+
   const handleSplashFinish = useCallback(() => {
     setShowSplash(false);
+    sessionStorage.setItem("splashShown", "true");
   }, []);
 
   return (

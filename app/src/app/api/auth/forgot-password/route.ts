@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
+import { eq } from 'drizzle-orm';
 import { db } from '@/backend/lib/db';
-import { passwordResetRequests } from '@/backend/lib/db/schema';
+import { passwordResetRequests, users } from '@/backend/lib/db/schema';
 
 export async function POST(req: Request) {
   try {
@@ -10,6 +11,18 @@ export async function POST(req: Request) {
       return NextResponse.json(
         { message: 'Email address is required.' },
         { status: 400 }
+      );
+    }
+
+    // Check if user exists
+    const existingUser = await db.query.users.findFirst({
+      where: eq(users.email, email),
+    });
+
+    if (!existingUser) {
+      return NextResponse.json(
+        { message: 'Email tidak terdaftar. Pastikan Anda sudah membuat akun.' },
+        { status: 404 }
       );
     }
 

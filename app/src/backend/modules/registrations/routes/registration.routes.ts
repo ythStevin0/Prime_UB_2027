@@ -35,6 +35,24 @@ registrationRoutes.post(
 );
 
 /**
+ * GET /api/registrations/check?competitionId=xxx
+ * Check if user is registered for a specific competition
+ */
+registrationRoutes.get('/check', async (c) => {
+  const session = c.get('session');
+  const competitionId = c.req.query('competitionId');
+  
+  if (!competitionId) {
+    return c.json(ApiResponse.success({ registered: false }));
+  }
+  
+  const registrations = await registrationService.getMyRegistrations(session!.user.id);
+  const isRegistered = registrations.some((r: { competitionId: string }) => r.competitionId === competitionId);
+  
+  return c.json(ApiResponse.success({ registered: isRegistered }));
+});
+
+/**
  * GET /api/registrations
  * Get my registrations
  */
