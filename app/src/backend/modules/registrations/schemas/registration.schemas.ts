@@ -13,7 +13,7 @@ export const registerMemberSchema = z.object({
 });
 
 export const createRegistrationSchema = z.object({
-  competitionId: z.string().uuid('Invalid competition ID'),
+  competitionId: z.string().min(1, 'Competition ID is required'),
   teamName: z.string().max(255).min(1, 'Nama Tim is required'),
   whatsapp: z.string().min(5, 'WhatsApp number is required').max(255),
   domisili: z.string().min(2, 'Domisili is required').max(255),
@@ -30,5 +30,5 @@ export const updateRegistrationStatusSchema = z.object({
 export const registrationQuerySchema = paginationSchema.extend({
   search: z.string().optional(),
   status: registrationStatusSchema.optional(),
-  competitionId: z.string().uuid().optional(),
+  competitionId: z.string().optional(),
 });

@@ -118,6 +118,9 @@ class RegistrationRepository {
       limit,
       offset,
       orderBy: (registrations, { desc }) => [desc(registrations.createdAt)],
+      with: {
+        members: true,
+      }
     });
 
     const totalResult = await db

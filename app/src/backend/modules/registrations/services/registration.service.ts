@@ -18,31 +18,10 @@ class RegistrationService {
    * Register a user to a competition.
    */
   async registerToCompetition(userId: string, payload: RegisterPayload): Promise<RegistrationWithMembers> {
-    // 1. Validate competition existence
-    const competition = await competitionRepository.findById(payload.competitionId);
-    if (!competition) {
-      throw AppError.notFound('Competition not found');
-    }
-
-    // 2. Validate competition rules (is open? is registration window open?)
-    validateRegistrationAllowed(competition);
-
-    // 3. Prevent double registration
+    // 1. Prevent double registration
     const existingRegistration = await registrationRepository.findUserRegistration(userId, payload.competitionId);
     if (existingRegistration) {
       throw AppError.conflict('You are already registered for this competition.');
-    }
-
-    // 4. Validate team configuration & members
-    validateTeamMembers(competition, payload.members);
-    
-    if (competition.type === 'TEAM' && !payload.teamName) {
-      throw AppError.badRequest('Team name is required for team competitions.');
-    }
-    
-    if (competition.type === 'INDIVIDUAL' && payload.teamName) {
-      // Ignore or reject. Rejecting is safer.
-      throw AppError.badRequest('Team name should not be provided for individual competitions.');
     }
 
     // 5. Create registration and members via repository

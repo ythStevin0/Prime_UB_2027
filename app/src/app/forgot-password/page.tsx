@@ -76,7 +76,7 @@ export default function ForgotPasswordPage() {
       <div className="flex-1 flex items-center justify-center relative z-10 pt-32 pb-24 px-4">
         <div className="w-full max-w-md">
           <div className="text-center mb-8">
-            <div className="mx-auto w-16 h-16 bg-blue-500/10 flex items-center justify-center rounded-full mb-4">
+            <div className="mx-auto w-16 h-16 bg-blue-500/10 flex items-center justify-center rounded-none mb-4">
               <KeyRound className="w-8 h-8 text-blue-400" />
             </div>
             <h1 className="text-3xl font-bold tracking-tight mb-2">Lupa Password?</h1>
@@ -85,7 +85,7 @@ export default function ForgotPasswordPage() {
             </p>
           </div>
 
-          <div className="bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+          <div className="bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/10 rounded-none p-8 shadow-2xl relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-blue-500 via-cyan-400 to-purple-500" />
 
             {success ? (
@@ -102,7 +102,7 @@ export default function ForgotPasswordPage() {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
                 {error && (
-                  <div className="p-3 bg-red-500/10 border border-red-500/30 text-red-400 text-sm rounded-lg">
+                  <div className="p-3 bg-red-500/10 border border-red-500/30 text-red-400 text-sm rounded-none">
                     {error}
                   </div>
                 )}
@@ -117,20 +117,20 @@ export default function ForgotPasswordPage() {
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder:text-gray-600 focus:outline-hidden focus:border-cyan-500/50 focus:bg-cyan-950/10 transition-all duration-300"
+                      className="w-full bg-white/5 border border-white/10 rounded-none py-3 pl-12 pr-4 text-white placeholder:text-gray-600 focus:outline-hidden focus:border-cyan-500/50 focus:bg-cyan-950/10 transition-all duration-300"
                       placeholder="nama@email.com"
                     />
                   </div>
                 </div>
 
                 <div className="pt-2">
-                  <div className="relative group p-0.5 overflow-hidden rounded-xl shadow-[0_0_15px_rgba(255,255,255,0.05)] hover:shadow-[0_0_30px_rgba(34,211,238,0.2)] transition-all duration-500">
+                  <div className="relative group p-0.5 overflow-hidden rounded-none shadow-[0_0_15px_rgba(255,255,255,0.05)] hover:shadow-[0_0_30px_rgba(34,211,238,0.2)] transition-all duration-500">
                     <div className="absolute inset-0 bg-white/20 group-hover:opacity-0 transition-opacity duration-300" />
                     <div className="absolute -inset-full opacity-0 group-hover:opacity-100 group-hover:animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#00000000_50%,#22d3ee_70%,#3b82f6_85%,#a855f7_100%)] transition-opacity duration-300" />
                     <button
                       type="submit"
                       disabled={loading}
-                      className="relative flex items-center justify-center gap-2 w-full bg-[#050505] text-white font-bold tracking-widest text-sm uppercase py-4 rounded-[10px] active:scale-[0.98] transition-transform duration-300 disabled:opacity-70 disabled:cursor-not-allowed z-10"
+                      className="relative flex items-center justify-center gap-2 w-full bg-[#050505] text-white font-bold tracking-widest text-sm uppercase py-4 rounded-none active:scale-[0.98] transition-transform duration-300 disabled:opacity-70 disabled:cursor-not-allowed z-10"
                     >
                       {loading ? (
                         <span className="flex items-center gap-2 text-cyan-400">

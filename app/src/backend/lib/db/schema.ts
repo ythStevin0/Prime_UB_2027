@@ -134,9 +134,7 @@ export const registrations = pgTable('registrations', {
   userId: uuid('user_id')
     .references(() => users.id)
     .notNull(),
-  competitionId: uuid('competition_id')
-    .references(() => competitions.id)
-    .notNull(),
+  competitionId: varchar('competition_id', { length: 255 }).notNull(),
   teamName: varchar('team_name', { length: 255 }),
   whatsapp: varchar('whatsapp', { length: 255 }),
   domisili: varchar('domisili', { length: 255 }),

@@ -40,17 +40,17 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
         
         {/* Main Content */}
         <div className="relative z-10 flex flex-col items-center">
-          <div className="mb-8 p-6 glass rounded-none border border-white/10 shadow-[0_0_40px_rgba(34,211,238,0.2)]">
+          <div className="mb-6 p-5 glass rounded-none border border-white/10 shadow-[0_0_40px_rgba(34,211,238,0.2)]">
             {evt.icon}
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4">
             {evt.title} <span className={evt.theme.text}>{evt.titleHighlight}</span>
           </h1>
           
           <div className="flex items-center gap-4 text-gray-400">
             <div className="h-px w-12 bg-blue-500/50" />
-            <p className="text-lg md:text-xl font-medium tracking-wide uppercase">
+            <p className="text-base md:text-lg font-medium tracking-wide uppercase">
               {evt.subtitle}
             </p>
             <div className="h-px w-12 bg-blue-500/50" />
@@ -78,7 +78,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
           <p className="text-gray-400">Tempat pelaksanaan {evt.title} {evt.titleHighlight}.</p>
         </div>
         
-        <div className="w-full h-125 rounded-none overflow-hidden border border-white/10 glass p-2">
+        <div className="w-full h-125 rounded-none overflow-hidden border border-white/10 glass p-2 group">
           <iframe 
             src={evt.mapEmbedUrl} 
             width="100%" 
@@ -87,7 +87,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
             allowFullScreen={false} 
             loading="lazy" 
             referrerPolicy="no-referrer-when-downgrade"
-            className="filter grayscale contrast-125 opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
+            className="filter grayscale contrast-125 opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none"
           />
         </div>
       </section>

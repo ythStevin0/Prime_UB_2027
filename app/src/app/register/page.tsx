@@ -148,11 +148,13 @@ export default function RegisterPage() {
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold font-mono tracking-tight text-white mb-4">
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-cyan-400">
-                [ Daftar Sekarang ]
-              </span>
-            </h1>
+            <div className="flex items-center justify-center gap-4 mb-4">
+              <div className="h-0.5 w-16 md:w-24 bg-blue-500" />
+              <h1 className="text-3xl md:text-4xl font-bold uppercase tracking-[0.2em] text-blue-500">
+                Daftar Sekarang
+              </h1>
+              <div className="h-0.5 w-16 md:w-24 bg-[#333]" />
+            </div>
             <p className="text-gray-400 max-w-2xl mx-auto">
               Daftarkan diri atau tim Anda ke berbagai kompetisi dan acara bergengsi di PRIME UB 2027.
             </p>

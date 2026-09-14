@@ -43,22 +43,22 @@ export default async function CompetitionDetailPage({ params }: { params: Promis
         <div className="relative z-10 flex flex-col items-center">
           {/* Large Icon / Illustration */}
           {comp.image ? (
-            <div className="mb-8 w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 relative flex items-center justify-center">
-              <Image src={comp.image} alt={comp.title} fill className="object-contain" sizes="(max-width: 768px) 256px, (max-width: 1024px) 320px, 384px" />
+            <div className="mb-8 w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 relative flex items-center justify-center">
+              <Image src={comp.image} alt={comp.title} fill className="object-contain" sizes="(max-width: 768px) 192px, (max-width: 1024px) 224px, 256px" />
             </div>
           ) : (
-            <div className="mb-8 p-6 glass rounded-none border border-white/10 shadow-[0_0_40px_rgba(34,211,238,0.2)]">
+            <div className="mb-6 p-5 glass rounded-none border border-white/10 shadow-[0_0_40px_rgba(34,211,238,0.2)]">
               {comp.icon}
             </div>
           )}
 
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4">
             {comp.title}
           </h1>
           
           <div className="flex items-center gap-4 text-gray-400">
             <div className="h-px w-12 bg-blue-500/50" />
-            <p className="text-lg md:text-xl font-medium tracking-wide">
+            <p className="text-base md:text-lg font-medium tracking-wide">
               {comp.subtitle}
             </p>
             <div className="h-px w-12 bg-blue-500/50" />
@@ -87,7 +87,7 @@ export default async function CompetitionDetailPage({ params }: { params: Promis
           <p className="text-gray-400">Tempat pelaksanaan babak Final / Puncak Acara.</p>
         </div>
         
-        <div className="w-full h-125 rounded-none overflow-hidden border border-white/10 glass p-2">
+        <div className="w-full h-125 rounded-none overflow-hidden border border-white/10 glass p-2 group">
           <iframe 
             src={comp.mapEmbedUrl} 
             width="100%" 
@@ -96,7 +96,7 @@ export default async function CompetitionDetailPage({ params }: { params: Promis
             allowFullScreen={false} 
             loading="lazy" 
             referrerPolicy="no-referrer-when-downgrade"
-            className="filter grayscale contrast-125 opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
+            className="filter grayscale contrast-125 opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none"
           />
         </div>
       </section>
