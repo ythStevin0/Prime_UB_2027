@@ -48,8 +48,9 @@ export default function RootLayout({
     <html
       lang="id"
       className={`${inter.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
     >
-      <body className="min-h-screen flex flex-col antialiased">
+      <body className="min-h-screen flex flex-col antialiased" suppressHydrationWarning>
         <AuthProvider>
           <SmoothScrollProvider>
             {children}

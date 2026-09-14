@@ -14,33 +14,44 @@ interface AdminHeaderProps {
 
 export function AdminHeader({ user }: AdminHeaderProps) {
   return (
-    <header className="h-16 border-b border-cyan-900/50 bg-[#020617]/80 backdrop-blur-xl flex items-center justify-between px-6 sticky top-0 z-40">
+    <header className="h-16 border-b border-white/10 bg-[#0a0a0a] flex items-center justify-between px-6 sticky top-0 z-40">
       <div className="flex items-center md:hidden">
-        <span className="font-mono font-bold text-lg text-cyan-400 tracking-wider">[ SYS_ADMIN ]</span>
+        <span className="font-semibold text-lg text-gray-200">Admin Panel</span>
       </div>
       
       <div className="hidden md:block">
-        <h2 className="text-cyan-500/70 font-mono text-xs uppercase tracking-widest flex items-center gap-2">
-          <span className="w-1.5 h-1.5 bg-cyan-500 shadow-[0_0_8px_rgba(6,182,212,0.8)] animate-pulse" />
-          Terminal Access
+        <h2 className="text-gray-400 font-medium text-sm">
+          Dashboard Overview
         </h2>
       </div>
 
-      <div className="flex items-center gap-4">
-        <div className="flex items-center gap-3 bg-cyan-950/30 px-4 py-2 border border-cyan-900/50 shadow-[inset_0_0_10px_rgba(6,182,212,0.1)]">
-          <User className="w-4 h-4 text-cyan-400" />
-          <span className="text-xs font-mono font-bold text-cyan-400 tracking-widest uppercase">
-            {user.name || user.email || 'CLEARANCE: ADMIN'}
-          </span>
+      <div className="flex items-center gap-6">
+        {/* User Profile Section */}
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center shrink-0">
+            <User className="w-5 h-5 text-blue-400" />
+          </div>
+          <div className="flex flex-col text-right md:text-left">
+            <span className="text-sm font-semibold text-gray-200">
+              {user.name || 'Admin User'}
+            </span>
+            <span className="text-xs text-gray-500">
+              {user.email || 'No email provided'}
+            </span>
+          </div>
         </div>
         
+        {/* Divider */}
+        <div className="h-8 w-px bg-white/10 hidden md:block"></div>
+
+        {/* Logout Button */}
         <button
           onClick={() => signOut({ callbackUrl: '/' })}
-          className="flex items-center justify-center p-2 relative group overflow-hidden bg-red-950/20 text-red-500 border border-red-900/50 transition-all hover:border-red-500 hover:text-red-400 hover:shadow-[0_0_15px_rgba(239,68,68,0.3)]"
+          className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
           title="Logout"
         >
-          <div className="absolute inset-0 w-full h-full bg-[repeating-linear-gradient(45deg,transparent,transparent_2px,rgba(239,68,68,0.1)_2px,rgba(239,68,68,0.1)_4px)] opacity-0 group-hover:opacity-100 transition-opacity" />
-          <LogOut className="w-5 h-5 relative z-10 group-hover:scale-110 transition-transform" />
+          <LogOut className="w-4 h-4" />
+          <span className="hidden md:inline">Logout</span>
         </button>
       </div>
     </header>

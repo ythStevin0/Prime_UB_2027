@@ -6,6 +6,9 @@ import { AppError } from '@backend/lib/errors';
 import { requireAuth } from '@backend/middleware/authGuard';
 import { registrationService } from '../services/registration.service';
 import { createRegistrationSchema } from '../schemas/registration.schemas';
+import { db } from '@backend/lib/db';
+import { submissions } from '@backend/lib/db/schema';
+import { eq } from 'drizzle-orm';
 
 export const registrationRoutes = new Hono<AppEnv>();
 
@@ -47,9 +50,28 @@ registrationRoutes.get('/check', async (c) => {
   }
   
   const registrations = await registrationService.getMyRegistrations(session!.user.id);
-  const isRegistered = registrations.some((r: { competitionId: string }) => r.competitionId === competitionId);
+  const registration = registrations.find((r: { competitionId: string, id: string, status: string }) => r.competitionId === competitionId);
   
-  return c.json(ApiResponse.success({ registered: isRegistered }));
+  if (registration) {
+    const [existingSubmission] = await db
+      .select()
+      .from(submissions)
+      .where(eq(submissions.registrationId, registration.id));
+      
+    return c.json(ApiResponse.success({ 
+      registered: true, 
+      status: registration.status, 
+      registrationId: registration.id,
+      hasSubmitted: !!existingSubmission
+    }));
+  } else {
+    return c.json(ApiResponse.success({ 
+      registered: false, 
+      status: null, 
+      registrationId: null,
+      hasSubmitted: false
+    }));
+  }
 });
 
 /**

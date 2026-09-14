@@ -22,11 +22,19 @@ export default async function AdminDashboardPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-mono font-bold text-cyan-400 tracking-tighter uppercase flex items-center gap-2">
-          <span className="w-4 h-4 bg-cyan-500 animate-pulse" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%)' }} />
+        <h1 
+          className="text-4xl font-mono font-bold text-cyan-400 tracking-widest uppercase flex items-center gap-3"
+          style={{ textShadow: '2px 0px 0px rgba(220, 38, 38, 0.6), -2px 0px 0px rgba(6, 182, 212, 0.6)' }}
+        >
+          <span className="w-5 h-5 bg-cyan-500" style={{ clipPath: 'polygon(0 0, 100% 0, 0 100%)' }} />
           Dashboard Overview
         </h1>
-        <p className="text-gray-400 mt-1 font-mono text-sm tracking-wide">SYSTEM INITIALIZED. AWAITING COMMAND.</p>
+        <p 
+          className="text-gray-400 mt-2 font-mono text-sm tracking-widest uppercase"
+          style={{ textShadow: '1px 0px 0px rgba(220, 38, 38, 0.5), -1px 0px 0px rgba(6, 182, 212, 0.5)' }}
+        >
+          SYSTEM INITIALIZED. AWAITING COMMAND.
+        </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

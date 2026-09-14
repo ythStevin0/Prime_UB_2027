@@ -41,15 +41,25 @@ const mediaPartners = [
   { name: "Tempo" },
 ];
 
+let hasHydrated = false;
+
 export default function HomePage() {
-  const [showSplash, setShowSplash] = useState(true);
+  const [showSplash, setShowSplash] = useState(() => {
+    if (typeof window === "undefined") return true;
+    
+    if (!hasHydrated) {
+      return true; // Match server for hydration
+    }
+    
+    return !sessionStorage.getItem("splashShown"); // Safe client navigation
+  });
 
   useEffect(() => {
-    const hasShown = sessionStorage.getItem("splashShown");
-    if (hasShown) {
+    hasHydrated = true;
+    if (sessionStorage.getItem("splashShown") && showSplash) {
       setTimeout(() => setShowSplash(false), 0);
     }
-  }, []);
+  }, [showSplash]);
 
   const handleSplashFinish = useCallback(() => {
     setShowSplash(false);

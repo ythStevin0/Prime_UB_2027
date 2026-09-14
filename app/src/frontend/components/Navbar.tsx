@@ -5,9 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { competitionsData } from "../data/competitions";
 import { eventsData } from "../data/events";
-import { ChevronDown, LogOut } from "lucide-react";
+import { ChevronDown, User } from "lucide-react";
 import StaggeredMenu from "./StaggeredMenu";
-import { useSession, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -115,73 +115,64 @@ export default function Navbar() {
         </div>
 
         {/* CTA Buttons */}
-        <div className="hidden md:flex gap-4 items-center">
+        <div className="hidden md:flex gap-2 items-center">
           
           {status === "authenticated" ? (
             <>
-              {/* Submit Karya - HUD Bracket Style */}
+              {/* Submit Karya */}
               <Link
                 href="/submit"
-                className="group relative flex items-center justify-center gap-1.5 px-1 py-1.5 font-semibold text-[13px] text-cyan-400 hover:text-cyan-300 transition-colors duration-300 tracking-wider uppercase"
+                className="relative flex items-center justify-center px-4 h-9.5 font-semibold text-[13px] text-blue-400 hover:text-white transition-all duration-300 tracking-wider uppercase active:scale-95 group"
               >
-                <span className="text-cyan-500/40 group-hover:text-cyan-300 group-hover:translate-x-1 transition-all duration-300 ease-out text-base leading-none font-light">[</span>
+                <div className="absolute top-0 left-0 w-2 h-2 group-hover:w-[80%] group-hover:h-[80%] border-t-2 border-l-2 border-blue-500/40 group-hover:border-blue-400 transition-all duration-300" />
                 <span className="relative z-10">Submit Karya</span>
-                <span className="text-cyan-500/40 group-hover:text-cyan-300 group-hover:-translate-x-1 transition-all duration-300 ease-out text-base leading-none font-light">]</span>
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-px bg-cyan-400/50 group-hover:w-2/3 transition-all duration-500 shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
+                <div className="absolute bottom-0 right-0 w-2 h-2 group-hover:w-[80%] group-hover:h-[80%] border-b-2 border-r-2 border-blue-500/40 group-hover:border-blue-400 transition-all duration-300" />
               </Link>
 
-              {/* Daftar Sekarang - Cyberpunk Clipped Style */}
-              <div 
-                className="relative p-px group cursor-pointer hover:shadow-[0_0_20px_rgba(34,211,238,0.3)] transition-shadow duration-300" 
-                style={{ clipPath: "polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)" }}
+              {/* Daftar Sekarang */}
+              <Link
+                href="/register"
+                className="relative flex items-center justify-center px-4 h-9.5 font-semibold text-[13px] text-blue-400 hover:text-white transition-all duration-300 tracking-wider uppercase active:scale-95 group"
               >
-                <div className="absolute inset-0 bg-linear-to-br from-blue-500/50 via-cyan-400/30 to-purple-500/50 group-hover:from-cyan-400 group-hover:to-blue-500 transition-colors duration-500" />
-                <Link
-                  href="/register"
-                  className="relative flex items-center justify-center px-5 py-2 font-semibold text-[13px] text-white tracking-wider uppercase bg-[#050505] group-hover:bg-[#0a0a0a] transition-colors duration-300 overflow-hidden"
-                  style={{ clipPath: "polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)" }}
-                >
-                  <div className="absolute inset-0 bg-blue-500/10 group-hover:bg-cyan-400/10 transition-colors duration-500" />
-                  <div className="absolute top-0 left-[-150%] w-[150%] h-full bg-linear-to-r from-transparent via-cyan-300/30 to-transparent skew-x-[-25deg] group-hover:left-[150%] transition-all duration-700 ease-in-out" />
-                  <span className="relative z-10 group-hover:text-cyan-100 drop-shadow-md transition-colors duration-300">Daftar Sekarang</span>
-                </Link>
-              </div>
+                <div className="absolute top-0 right-0 w-2 h-2 group-hover:w-[80%] group-hover:h-[80%] border-t-2 border-r-2 border-blue-500/40 group-hover:border-blue-400 transition-all duration-300" />
+                <span className="relative z-10">Daftar Sekarang</span>
+                <div className="absolute bottom-0 left-0 w-2 h-2 group-hover:w-[80%] group-hover:h-[80%] border-b-2 border-l-2 border-blue-500/40 group-hover:border-blue-400 transition-all duration-300" />
+              </Link>
               
-              {/* Logout Button */}
-              <button
-                onClick={() => signOut({ callbackUrl: '/' })}
-                className="group relative flex items-center justify-center gap-1.5 px-2 py-1.5 font-semibold text-[13px] text-gray-400 hover:text-red-400 transition-colors duration-300"
-                title={`Logout (${session?.user?.email})`}
+              <div className="h-4 w-px bg-white/10 hidden md:block"></div>
+
+              {/* User Profile Link */}
+              <Link 
+                href="/profile" 
+                title={`Profil Anda (${session?.user?.email || 'User'})`}
+                className="hidden md:flex items-center justify-center w-10 h-10 rounded-none hover:bg-white/5 border border-transparent hover:border-white/10 transition-all duration-300 group"
               >
-                <LogOut className="w-4 h-4" />
-              </button>
+                <div className="w-8 h-8 rounded-none bg-blue-500/10 border border-blue-500/20 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300">
+                  <User className="w-4 h-4 text-blue-400 group-hover:text-blue-300 transition-colors" />
+                </div>
+              </Link>
             </>
           ) : (
             <>
               {/* Log In Button */}
               <Link
                 href="/login"
-                className="group relative flex items-center justify-center gap-1.5 px-3 py-1.5 font-semibold text-[13px] text-gray-300 hover:text-white transition-colors duration-300 tracking-wider uppercase"
+                className="relative flex items-center justify-center px-4 h-9.5 font-semibold text-[13px] text-blue-400 hover:text-white transition-all duration-300 tracking-wider uppercase active:scale-95 group"
               >
+                <div className="absolute top-0 left-0 w-2 h-2 group-hover:w-[80%] group-hover:h-[80%] border-t-2 border-l-2 border-blue-500/40 group-hover:border-blue-400 transition-all duration-300" />
                 <span className="relative z-10">Log In</span>
+                <div className="absolute bottom-0 right-0 w-2 h-2 group-hover:w-[80%] group-hover:h-[80%] border-b-2 border-r-2 border-blue-500/40 group-hover:border-blue-400 transition-all duration-300" />
               </Link>
 
-              {/* Sign In - Cyberpunk Clipped Style */}
-              <div 
-                className="relative p-px group cursor-pointer hover:shadow-[0_0_20px_rgba(34,211,238,0.3)] transition-shadow duration-300" 
-                style={{ clipPath: "polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)" }}
+              {/* Sign In Button */}
+              <Link
+                href="/signup"
+                className="relative flex items-center justify-center px-4 h-9.5 font-semibold text-[13px] text-blue-400 hover:text-white transition-all duration-300 tracking-wider uppercase active:scale-95 group"
               >
-                <div className="absolute inset-0 bg-linear-to-br from-blue-500/50 via-cyan-400/30 to-purple-500/50 group-hover:from-cyan-400 group-hover:to-blue-500 transition-colors duration-500" />
-                <Link
-                  href="/signup"
-                  className="relative flex items-center justify-center px-5 py-2 font-semibold text-[13px] text-white tracking-wider uppercase bg-[#050505] group-hover:bg-[#0a0a0a] transition-colors duration-300 overflow-hidden"
-                  style={{ clipPath: "polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)" }}
-                >
-                  <div className="absolute inset-0 bg-blue-500/10 group-hover:bg-cyan-400/10 transition-colors duration-500" />
-                  <div className="absolute top-0 left-[-150%] w-[150%] h-full bg-linear-to-r from-transparent via-cyan-300/30 to-transparent skew-x-[-25deg] group-hover:left-[150%] transition-all duration-700 ease-in-out" />
-                  <span className="relative z-10 group-hover:text-cyan-100 drop-shadow-md transition-colors duration-300">Sign In</span>
-                </Link>
-              </div>
+                <div className="absolute top-0 right-0 w-2 h-2 group-hover:w-[80%] group-hover:h-[80%] border-t-2 border-r-2 border-blue-500/40 group-hover:border-blue-400 transition-all duration-300" />
+                <span className="relative z-10">Sign In</span>
+                <div className="absolute bottom-0 left-0 w-2 h-2 group-hover:w-[80%] group-hover:h-[80%] border-b-2 border-l-2 border-blue-500/40 group-hover:border-blue-400 transition-all duration-300" />
+              </Link>
             </>
           )}
         </div>
@@ -220,7 +211,7 @@ export default function Navbar() {
                 ? [
                     { label: 'Submit Karya', link: '/submit', primary: false },
                     { label: 'Daftar Sekarang', link: '/register', primary: true },
-                    { label: 'Logout', link: '#', primary: false, onClick: () => signOut({ callbackUrl: '/' }) }
+                    { label: 'Profile', link: '/profile', primary: false }
                   ]
                 : [
                     { label: 'Log In', link: '/login', primary: false },
